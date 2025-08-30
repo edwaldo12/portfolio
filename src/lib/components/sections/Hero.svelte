@@ -132,6 +132,7 @@
 </script>
 
 <section
+  id="hero"
   bind:this={heroElement}
   class="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-br from-dark-100 via-dark-200 to-dark-100"
 >
