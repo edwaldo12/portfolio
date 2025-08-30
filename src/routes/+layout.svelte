@@ -12,16 +12,14 @@
 
 <!-- Only show header and footer on non-error pages -->
 {#if !isErrorPage}
-  {#if !isHomePage}
-    <Header />
-  {/if}
+  <Header />
 {/if}
 
 <main class="{isErrorPage ? '' : 'min-h-screen'}">
   <slot />
 </main>
 
-{#if !isErrorPage && !isHomePage}
+{#if !isErrorPage}
   <Footer />
 {/if}
 
