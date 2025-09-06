@@ -1,86 +1,207 @@
 export interface Skill {
   name: string;
-  level: number;
+  level: 'Expert' | 'Advanced' | 'Proficient' | 'Intermediate';
+  experience: string;
+  projects?: string[];
+  description?: string;
 }
 
 export interface SkillCategory {
   category: string;
+  icon: string;
   skills: Skill[];
 }
 
 export const skillsData: SkillCategory[] = [
   {
     category: 'Programming Languages',
+    icon: 'code',
     skills: [
-      { name: 'Golang', level: 80 },
-      { name: 'JavaScript', level: 95 },
-      { name: 'TypeScript', level: 90 },
-      { name: 'PHP', level: 85 },
-      { name: 'Java', level: 60 },
-      { name: 'CSS', level: 90 }
+      { 
+        name: 'JavaScript', 
+        level: 'Expert', 
+        experience: '6+ years',
+        projects: ['E-commerce Platform', 'Real-time Chat App', 'Portfolio Website'],
+        description: 'Full-stack development with modern ES6+ features'
+      },
+      { 
+        name: 'TypeScript', 
+        level: 'Advanced', 
+        experience: '5+ years',
+        projects: ['Enterprise Dashboard', 'API Gateway', 'Microservices'],
+        description: 'Type-safe development for large-scale applications'
+      },
+      { 
+        name: 'Golang', 
+        level: 'Advanced', 
+        experience: '4+ years',
+        projects: ['Microservices API', 'Performance Optimization'],
+        description: 'High-performance backend services and concurrent programming'
+      },
+      { 
+        name: 'PHP', 
+        level: 'Expert', 
+        experience: '6+ years',
+        projects: ['CMS Development', 'E-commerce Backend'],
+        description: 'Server-side development with Laravel and CodeIgniter'
+      },
+      { 
+        name: 'Java', 
+        level: 'Proficient', 
+        experience: '2+ years',
+        projects: ['Enterprise Applications'],
+        description: 'Object-oriented programming and enterprise solutions'
+      }
     ]
   },
   {
-    category: 'Frontend',
+    category: 'Frontend Development',
+    icon: 'monitor',
     skills: [
-      { name: 'React', level: 90 },
-      { name: 'Next.js', level: 85 },
-      { name: 'ReactJS', level: 90 },
-      { name: 'Redux', level: 80 },
-      { name: 'Bootstrap', level: 85 },
-      { name: 'jQuery', level: 80 },
-      { name: 'SCSS', level: 85 },
-      { name: 'Svelte', level: 75 },
-      { name: 'SolidJS', level: 70 }
+      { 
+        name: 'React', 
+        level: 'Advanced', 
+        experience: '5+ years',
+        projects: ['SPA Dashboard', 'E-commerce Frontend', 'Admin Panel'],
+        description: 'Component-based architecture with hooks and context'
+      },
+      { 
+        name: 'Next.js', 
+        level: 'Proficient', 
+        experience: '3+ years',
+        projects: ['SEO-optimized Websites', 'Full-stack Applications'],
+        description: 'Server-side rendering and static site generation'
+      },
+      { 
+        name: 'Svelte/SvelteKit', 
+        level: 'Advanced', 
+        experience: '1+ years',
+        projects: ['Portfolio Website', 'Interactive Dashboard'],
+        description: 'Modern reactive framework with excellent performance'
+      },
+      { 
+        name: 'Redux', 
+        level: 'Advanced', 
+        experience: '5+ years',
+        projects: ['Complex State Management', 'Multi-user Applications'],
+        description: 'State management for complex React applications'
+      },
+      { 
+        name: 'Tailwind CSS', 
+        level: 'Advanced', 
+        experience: '4+ years',
+        projects: ['Responsive Designs', 'Component Libraries'],
+        description: 'Utility-first CSS framework for rapid UI development'
+      }
     ]
   },
   {
-    category: 'Backend',
+    category: 'Backend Development',
+    icon: 'server',
     skills: [
-      { name: 'Node.js', level: 85 },
-      { name: 'Express.js', level: 85 },
-      { name: 'Laravel', level: 90 },
-      { name: 'CodeIgniter', level: 85 },
-      { name: 'REST APIs', level: 90 },
-      { name: 'Microservices', level: 80 },
-      { name: 'JWT', level: 85 },
-      { name: 'AXIOS', level: 80 },
-      { name: 'Gin', level: 75 },
-      { name: 'Fiber', level: 75 }
+      { 
+        name: 'Node.js', 
+        level: 'Advanced', 
+        experience: '5+ years',
+        projects: ['REST APIs', 'Real-time Applications', 'Microservices'],
+        description: 'Server-side JavaScript with Express and Fastify'
+      },
+      { 
+        name: 'Laravel', 
+        level: 'Advanced', 
+        experience: '5+ years',
+        projects: ['Enterprise Web Apps', 'API Development', 'CMS'],
+        description: 'Full-featured PHP framework with Eloquent ORM'
+      },
+      { 
+        name: 'REST APIs', 
+        level: 'Expert', 
+        experience: '6+ years',
+        projects: ['Mobile App APIs', 'Third-party Integrations'],
+        description: 'RESTful service design and implementation'
+      },
+      { 
+        name: 'Microservices', 
+        level: 'Advanced', 
+        experience: '2+ years',
+        projects: ['Distributed Systems', 'Scalable Architecture'],
+        description: 'Service-oriented architecture and containerization'
+      },
+      { 
+        name: 'GraphQL', 
+        level: 'Intermediate', 
+        experience: '1+ years',
+        projects: ['Flexible API Layer'],
+        description: 'Query language for APIs with type safety'
+      }
     ]
   },
   {
-    category: 'Database',
+    category: 'Database & Storage',
+    icon: 'database',
     skills: [
-      { name: 'MySQL', level: 90 },
-      { name: 'PostgreSQL', level: 85 },
-      { name: 'MongoDB', level: 80 },
-      { name: 'SQL Server', level: 80 },
-      { name: 'Redis', level: 75 }
+      { 
+        name: 'MySQL', 
+        level: 'Expert', 
+        experience: '6+ years',
+        projects: ['E-commerce Database', 'Analytics Platform', 'Enterprise Systems'],
+        description: 'Complex queries, optimization, and database design'
+      },
+      { 
+        name: 'PostgreSQL', 
+        level: 'Expert', 
+        experience: '6+ years',
+        projects: ['Enterprise Applications', 'Data Analytics', 'High-performance Systems'],
+        description: 'Advanced SQL features and performance tuning'
+      },
+      { 
+        name: 'MongoDB', 
+        level: 'Advanced', 
+        experience: '4+ years',
+        projects: ['Document-based Applications', 'Real-time Data', 'Microservices'],
+        description: 'NoSQL database for flexible data structures'
+      },
+      { 
+        name: 'Redis', 
+        level: 'Advanced', 
+        experience: '4+ years',
+        projects: ['Caching Layer', 'Session Management', 'Real-time Applications'],
+        description: 'In-memory data structure store for caching'
+      }
     ]
   },
   {
-    category: 'Message Brokers & Communication',
+    category: 'DevOps & Tools',
+    icon: 'settings',
     skills: [
-      { name: 'RabbitMQ', level: 80 },
-      { name: 'NATS', level: 75 },
-      { name: 'Websocket', level: 80 },
-      { name: 'Xendit', level: 75 },
-      { name: 'Kafka', level: 80 }
-    ]
-  },
-  {
-    category: 'Tools & Technologies',
-    skills: [
-      { name: 'Git', level: 95 },
-      { name: 'Docker', level: 80 },
-      { name: 'Webpack', level: 75 },
-      { name: 'GCP', level: 75 },
-      { name: 'Atomic Architecture', level: 80 },
-      { name: 'Datadog', level: 70 },
-      { name: 'Grpc', level: 75 },
-      { name: 'K8S', level: 70 },
-      { name: 'Sonarqube', level: 75 }
+      { 
+        name: 'Docker', 
+        level: 'Advanced', 
+        experience: '3+ years',
+        projects: ['Containerized Applications', 'Development Environment'],
+        description: 'Containerization and orchestration'
+      },
+      { 
+        name: 'Git', 
+        level: 'Expert', 
+        experience: '6+ years',
+        projects: ['All Projects', 'Team Collaboration', 'CI/CD Pipelines'],
+        description: 'Version control, branching strategies, and collaboration'
+      },
+      { 
+        name: 'AWS/GCP', 
+        level: 'Proficient', 
+        experience: '2+ years',
+        projects: ['Cloud Deployments', 'Serverless Functions'],
+        description: 'Cloud infrastructure and deployment'
+      },
+      { 
+        name: 'Kubernetes', 
+        level: 'Intermediate', 
+        experience: '1+ years',
+        projects: ['Container Orchestration'],
+        description: 'Container orchestration and scaling'
+      }
     ]
   }
 ];

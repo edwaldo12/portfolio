@@ -1,9 +1,20 @@
 <script lang="ts">
   import { onMount } from 'svelte';
-  import { gsap } from 'gsap';
+  import { browser } from '$app/environment';
   import { Send, Mail, Phone, MapPin } from 'lucide-svelte';
   import emailjs from '@emailjs/browser';
   import { personalInfo } from '$lib/data/personal';
+
+  // Browser-only GSAP import
+  let gsap: any;
+  
+  async function initGSAP() {
+    if (browser && !gsap) {
+      const gsapModule = await import('gsap');
+      gsap = gsapModule.gsap;
+    }
+    return gsap;
+  }
 
   let formElement: HTMLFormElement;
   let contactSection: HTMLElement;
@@ -34,14 +45,19 @@
   let submitMessage = '';
   let submitStatus: 'success' | 'error' | 'idle' = 'idle';
 
-  onMount(() => {
+  onMount(async () => {
     // Initialize EmailJS
     emailjs.init(import.meta.env.VITE_EMAILJS_PUBLIC_KEY);
+    
+    if (!browser) return;
+    
+    const gsapInstance = await initGSAP();
+    if (!gsapInstance) return;
     
     // Ensure elements exist before animating
     if (contactSection) {
       // Animate contact section
-      gsap.fromTo(contactSection, 
+      gsapInstance.fromTo(contactSection, 
         { opacity: 0, y: 50 },
         { opacity: 1, y: 0, duration: 1, ease: 'power2.out' }
       );
@@ -51,7 +67,7 @@
     setTimeout(() => {
       const contactItems = document.querySelectorAll('.contact-item');
       if (contactItems.length > 0) {
-        gsap.fromTo(contactItems, 
+        gsapInstance.fromTo(contactItems, 
           { opacity: 0, x: -30 },
           { opacity: 1, x: 0, duration: 0.8, stagger: 0.2, delay: 0.3 }
         );
@@ -185,7 +201,7 @@
   <meta name="description" content="Get in touch with {personalInfo.name}. Let's discuss your next project." />
 </svelte:head>
 
-<main class="min-h-screen bg-gradient-to-br from-dark-100 via-dark-200 to-dark-100 py-20">
+<main class="min-h-screen bg-gradient-to-br from-gray-50 via-white to-gray-100 py-20">
   <div bind:this={contactSection} class="container mx-auto px-6">
     <div class="text-center mb-16">
       <h1 class="text-4xl md:text-5xl font-bold text-white mb-4">

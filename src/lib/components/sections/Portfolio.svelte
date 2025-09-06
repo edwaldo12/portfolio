@@ -3,7 +3,7 @@
   // Placeholder component - Portfolio functionality is temporarily disabled
 </script>
 
-<section id="portfolio" class="py-20 bg-dark-200">
+<!-- <section id="portfolio" class="py-20 bg-dark-200">
   <div class="container mx-auto px-6">
     <div class="text-center">
       <h2 class="text-4xl md:text-5xl font-bold text-white mb-4">
@@ -14,4 +14,4 @@
       </p>
     </div>
   </div>
-</section>
+</section> -->

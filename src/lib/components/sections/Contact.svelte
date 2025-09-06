@@ -1,13 +1,27 @@
 <script lang="ts">
   import { onMount } from 'svelte';
+  import { browser } from '$app/environment';
   import { createForm } from 'svelte-forms-lib';
   import * as yup from 'yup';
   import emailjs from '@emailjs/browser';
   import { personalInfo } from '$lib/data/personal';
   import { Mail, Phone, MapPin, Send, Github, Linkedin, Twitter } from 'lucide-svelte';
-  import { gsap } from 'gsap';
-  import { ScrollTrigger } from 'gsap/ScrollTrigger';
   import { AnimationUtils } from '$lib/utils/animations';
+
+  // Browser-only GSAP import
+  let gsap: any;
+  let ScrollTrigger: any;
+  
+  async function initGSAP() {
+    if (browser && !gsap) {
+      const gsapModule = await import('gsap');
+      const scrollTriggerModule = await import('gsap/ScrollTrigger');
+      gsap = gsapModule.gsap;
+      ScrollTrigger = scrollTriggerModule.ScrollTrigger;
+      gsap.registerPlugin(ScrollTrigger);
+    }
+    return { gsap, ScrollTrigger };
+  }
 
   let isSubmitting = false;
   let submitMessage = '';
@@ -78,11 +92,13 @@
     }
   };
 
-  onMount(() => {
+  onMount(async () => {
+    if (!browser) return;
+    
     // Initialize EmailJS
     emailjs.init(import.meta.env.VITE_EMAILJS_PUBLIC_KEY);
     
-    gsap.registerPlugin(ScrollTrigger);
+    await initGSAP();
     
     // Animate section title
     const titleElement = document.querySelector('.contact-title');
@@ -112,14 +128,14 @@
   });
 </script>
 
-<section id="contact" class="py-20 bg-dark-200">
+<section id="contact" class="py-20 bg-gray-50">
   <div class="container mx-auto px-6">
     <!-- Section Header -->
     <div class="text-center mb-16">
-      <h2 class="contact-title text-4xl md:text-5xl font-bold text-white mb-4">
-        Get In <span class="text-accent">Touch</span>
+      <h2 class="contact-title text-4xl md:text-5xl font-bold text-gray-900 mb-4">
+        Get In <span class="text-text-primary">Touch</span>
       </h2>
-      <p class="contact-subtitle text-lg text-gray-400 max-w-2xl mx-auto">
+      <p class="contact-subtitle text-lg text-gray-600 max-w-2xl mx-auto">
         Ready to start your next project? Let's discuss your ideas and create something amazing together.
       </p>
     </div>
@@ -128,8 +144,8 @@
       <!-- Contact Info -->
       <div class="contact-info space-y-8">
         <div>
-          <h3 class="text-2xl font-semibold text-white mb-6">Let's Talk</h3>
-          <p class="text-gray-300 leading-relaxed mb-8">
+          <h3 class="text-2xl font-semibold text-gray-900 mb-6">Let's Talk</h3>
+          <p class="text-gray-600 leading-relaxed mb-8">
             I'm always interested in new opportunities and exciting projects. 
             Whether you have a question, want to discuss a project, or just want to say hello, 
             feel free to reach out!
@@ -139,50 +155,50 @@
         <!-- Contact Details -->
         <div class="space-y-6">
           <div class="contact-item flex items-center gap-4">
-            <div class="w-12 h-12 bg-accent/10 rounded-lg flex items-center justify-center">
-              <Mail size={20} class="text-accent" />
+            <div class="w-12 h-12 bg-gray-100 rounded-lg flex items-center justify-center">
+              <Mail size={20} class="text-text-primary" />
             </div>
             <div>
-              <div class="text-white font-medium">Email</div>
-              <a href="mailto:{personalInfo.email}" class="text-gray-400 hover:text-accent transition-colors">
+              <div class="text-gray-900 font-medium">Email</div>
+              <a href="mailto:{personalInfo.email}" class="text-gray-600 hover:text-text-primary transition-colors">
                 {personalInfo.email}
               </a>
             </div>
           </div>
 
           <div class="contact-item flex items-center gap-4">
-            <div class="w-12 h-12 bg-accent/10 rounded-lg flex items-center justify-center">
-              <Phone size={20} class="text-accent" />
+            <div class="w-12 h-12 bg-gray-100 rounded-lg flex items-center justify-center">
+              <Phone size={20} class="text-text-primary" />
             </div>
             <div>
-              <div class="text-white font-medium">Phone</div>
-              <a href="tel:{personalInfo.phone}" class="text-gray-400 hover:text-accent transition-colors">
+              <div class="text-gray-900 font-medium">Phone</div>
+              <a href="tel:{personalInfo.phone}" class="text-gray-600 hover:text-text-primary transition-colors">
                 {personalInfo.phone}
               </a>
             </div>
           </div>
 
           <div class="contact-item flex items-center gap-4">
-            <div class="w-12 h-12 bg-accent/10 rounded-lg flex items-center justify-center">
-              <MapPin size={20} class="text-accent" />
+            <div class="w-12 h-12 bg-gray-100 rounded-lg flex items-center justify-center">
+              <MapPin size={20} class="text-text-primary" />
             </div>
             <div>
-              <div class="text-white font-medium">Location</div>
-              <div class="text-gray-400">{personalInfo.location}</div>
+              <div class="text-gray-900 font-medium">Location</div>
+              <div class="text-gray-600">{personalInfo.location}</div>
             </div>
           </div>
         </div>
 
         <!-- Social Links -->
         <div>
-          <h4 class="text-lg font-medium text-white mb-4">Follow Me</h4>
+          <h4 class="text-lg font-medium text-gray-900 mb-4">Follow Me</h4>
           <div class="flex gap-4">
             {#if personalInfo.social.github}
               <a
                 href={personalInfo.social.github}
                 target="_blank"
                 rel="noopener noreferrer"
-                class="social-link w-12 h-12 bg-dark-100 border border-gray-700 rounded-lg flex items-center justify-center text-gray-400 hover:text-accent hover:border-accent/30 transition-all duration-300 hover:scale-110"
+                class="social-link w-12 h-12 bg-white border border-gray-200 rounded-lg flex items-center justify-center text-gray-600 hover:text-text-primary hover:border-gray-300 transition-all duration-300 hover:scale-110 shadow-sm"
               >
                 <Github size={20} />
               </a>
@@ -192,7 +208,7 @@
                 href={personalInfo.social.linkedin}
                 target="_blank"
                 rel="noopener noreferrer"
-                class="social-link w-12 h-12 bg-dark-100 border border-gray-700 rounded-lg flex items-center justify-center text-gray-400 hover:text-accent hover:border-accent/30 transition-all duration-300 hover:scale-110"
+                class="social-link w-12 h-12 bg-white border border-gray-200 rounded-lg flex items-center justify-center text-gray-600 hover:text-text-primary hover:border-gray-300 transition-all duration-300 hover:scale-110 shadow-sm"
               >
                 <Linkedin size={20} />
               </a>
@@ -202,7 +218,7 @@
                 href={personalInfo.social.twitter}
                 target="_blank"
                 rel="noopener noreferrer"
-                class="social-link w-12 h-12 bg-dark-100 border border-gray-700 rounded-lg flex items-center justify-center text-gray-400 hover:text-accent hover:border-accent/30 transition-all duration-300 hover:scale-110"
+                class="social-link w-12 h-12 bg-white border border-gray-200 rounded-lg flex items-center justify-center text-gray-600 hover:text-text-primary hover:border-gray-300 transition-all duration-300 hover:scale-110 shadow-sm"
               >
                 <Twitter size={20} />
               </a>
@@ -212,13 +228,13 @@
       </div>
 
       <!-- Contact Form -->
-      <div class="contact-form bg-dark-100 rounded-xl p-8 border border-gray-800">
-        <h3 class="text-2xl font-semibold text-white mb-6">Send Message</h3>
+      <div class="contact-form bg-white rounded-xl p-8 border border-gray-200 shadow-sm">
+        <h3 class="text-2xl font-semibold text-gray-900 mb-6">Send Message</h3>
         
         <form on:submit={handleSubmit} class="space-y-6">
           <!-- Name -->
           <div>
-            <label for="name" class="block text-sm font-medium text-gray-300 mb-2">
+            <label for="name" class="block text-sm font-medium text-gray-700 mb-2">
               Full Name *
             </label>
             <input
@@ -227,7 +243,7 @@
               type="text"
               bind:value={$form.name}
               on:change={handleChange}
-              class="w-full px-4 py-3 bg-dark-200 border border-gray-700 rounded-lg text-white placeholder-gray-500 focus:border-accent focus:outline-none transition-colors
+              class="w-full px-4 py-3 bg-gray-50 border border-gray-300 rounded-lg text-gray-900 placeholder-gray-500 focus:border-text-primary focus:outline-none transition-colors
                 {$errors.name ? 'border-red-500' : ''}"
               placeholder="Your full name"
             />
@@ -238,7 +254,7 @@
 
           <!-- Email -->
           <div>
-            <label for="email" class="block text-sm font-medium text-gray-300 mb-2">
+            <label for="email" class="block text-sm font-medium text-gray-700 mb-2">
               Email Address *
             </label>
             <input
@@ -247,7 +263,7 @@
               type="email"
               bind:value={$form.email}
               on:change={handleChange}
-              class="w-full px-4 py-3 bg-dark-200 border border-gray-700 rounded-lg text-white placeholder-gray-500 focus:border-accent focus:outline-none transition-colors
+              class="w-full px-4 py-3 bg-gray-50 border border-gray-300 rounded-lg text-gray-900 placeholder-gray-500 focus:border-text-primary focus:outline-none transition-colors
                 {$errors.email ? 'border-red-500' : ''}"
               placeholder="your.email@example.com"
             />
@@ -258,7 +274,7 @@
 
           <!-- Subject -->
           <div>
-            <label for="subject" class="block text-sm font-medium text-gray-300 mb-2">
+            <label for="subject" class="block text-sm font-medium text-gray-700 mb-2">
               Subject *
             </label>
             <input
@@ -267,7 +283,7 @@
               type="text"
               bind:value={$form.subject}
               on:change={handleChange}
-              class="w-full px-4 py-3 bg-dark-200 border border-gray-700 rounded-lg text-white placeholder-gray-500 focus:border-accent focus:outline-none transition-colors
+              class="w-full px-4 py-3 bg-gray-50 border border-gray-300 rounded-lg text-gray-900 placeholder-gray-500 focus:border-text-primary focus:outline-none transition-colors
                 {$errors.subject ? 'border-red-500' : ''}"
               placeholder="What's this about?"
             />
@@ -278,7 +294,7 @@
 
           <!-- Message -->
           <div>
-            <label for="message" class="block text-sm font-medium text-gray-300 mb-2">
+            <label for="message" class="block text-sm font-medium text-gray-700 mb-2">
               Message *
             </label>
             <textarea
@@ -287,7 +303,7 @@
               rows="5"
               bind:value={$form.message}
               on:change={handleChange}
-              class="w-full px-4 py-3 bg-dark-200 border border-gray-700 rounded-lg text-white placeholder-gray-500 focus:border-accent focus:outline-none transition-colors resize-none
+              class="w-full px-4 py-3 bg-gray-50 border border-gray-300 rounded-lg text-gray-900 placeholder-gray-500 focus:border-text-primary focus:outline-none transition-colors resize-none
                 {$errors.message ? 'border-red-500' : ''}"
               placeholder="Tell me about your project..."
             ></textarea>
@@ -300,11 +316,11 @@
           <button
             type="submit"
             disabled={!$isValid || isSubmitting}
-            class="w-full bg-accent text-dark-100 px-8 py-4 rounded-lg font-semibold hover:bg-accent/90 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2
+            class="w-full bg-text-primary text-white px-8 py-4 rounded-lg font-semibold hover:bg-gray-700 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2
               {isSubmitting ? 'animate-pulse' : 'hover:scale-105'}"
           >
             {#if isSubmitting}
-              <div class="w-5 h-5 border-2 border-dark-100/30 border-t-dark-100 rounded-full animate-spin"></div>
+              <div class="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin"></div>
               Sending...
             {:else}
               <Send size={20} />

@@ -1,9 +1,21 @@
 <script lang="ts">
   import { onMount } from 'svelte';
+  import { browser } from '$app/environment';
   import { ChevronDown, Download, Mail } from 'lucide-svelte';
   import { personalInfo } from '$lib/data/personal';
-  import { gsap } from 'gsap';
-  import { AnimationUtils } from '$lib/utils/animations';
+  import golangSvg from '$lib/assets/golang.svg';
+
+
+  // Browser-only GSAP import
+  let gsap: any;
+  
+  async function initGSAP() {
+    if (browser && !gsap) {
+      const gsapModule = await import('gsap');
+      gsap = gsapModule.gsap;
+    }
+    return gsap;
+  }
 
   let heroElement: HTMLElement;
   let typedText = '';
@@ -20,46 +32,66 @@
   ];
 
   onMount(() => {
-    // GSAP Timeline for hero animations
-    const tl = gsap.timeline();
+    if (!browser) return;
     
-    // Animate hero content
-    tl.from('.hero-greeting', {
-      opacity: 0,
-      y: 30,
-      duration: 0.8,
-      ease: 'power2.out'
-    })
-    .from('.hero-name', {
-      opacity: 0,
-      y: 30,
-      duration: 0.8,
-      ease: 'power2.out'
-    }, '-=0.6')
-    .from('.hero-role', {
-      opacity: 0,
-      y: 30,
-      duration: 0.8,
-      ease: 'power2.out'
-    }, '-=0.6')
-    .from('.hero-bio', {
-      opacity: 0,
-      y: 30,
-      duration: 0.8,
-      ease: 'power2.out'
-    }, '-=0.4')
-    .from('.hero-stats', {
-      opacity: 0,
-      y: 30,
-      duration: 0.8,
-      ease: 'power2.out'
-    }, '-=0.4')
-    .from('.hero-buttons', {
-      opacity: 0,
-      y: 30,
-      duration: 0.8,
-      ease: 'power2.out'
-    }, '-=0.4');
+    initGSAP().then(() => {
+      // Initialize hero animations
+      const tl = gsap.timeline({ delay: 0.5 });
+      
+      // Animate hero content
+      tl.fromTo('.hero-title', 
+        { opacity: 0, y: 50 },
+        { opacity: 1, y: 0, duration: 1, ease: 'power2.out' }
+      )
+      .fromTo('.hero-subtitle', 
+        { opacity: 0, y: 30 },
+        { opacity: 1, y: 0, duration: 0.8, ease: 'power2.out' }, '-=0.5'
+      )
+      .fromTo('.hero-description', 
+        { opacity: 0, y: 30 },
+        { opacity: 1, y: 0, duration: 0.8, ease: 'power2.out' }, '-=0.3'
+      )
+      .fromTo('.hero-cta', 
+        { opacity: 0, scale: 0.8 },
+        { opacity: 1, scale: 1, duration: 0.6, ease: 'back.out(1.7)' }, '-=0.2'
+      );
+      
+      // Typing animation for the subtitle
+      const subtitle = document.querySelector('.typing-text');
+      if (subtitle) {
+        const text = subtitle.textContent || '';
+        subtitle.textContent = '';
+        
+        gsap.to(subtitle, {
+          duration: text.length * 0.05,
+          ease: 'none',
+          onUpdate: function() {
+            const progress = this.progress();
+            const currentLength = Math.floor(progress * text.length);
+            subtitle.textContent = text.slice(0, currentLength);
+          }
+        });
+      }
+      
+      // Scroll indicator animation
+      gsap.to('.scroll-indicator', {
+        y: 10,
+        duration: 1.5,
+        repeat: -1,
+        yoyo: true,
+        ease: 'power2.inOut'
+      });
+      
+      // Floating decorative elements
+      gsap.to('.floating-element', {
+        y: -20,
+        duration: 3,
+        repeat: -1,
+        yoyo: true,
+        ease: 'power2.inOut',
+        stagger: 0.5
+      });
+    });
     
     // Typing animation
     const typeWriter = () => {
@@ -88,25 +120,6 @@
     // Start typing animation after initial animations
     setTimeout(typeWriter, 1500);
 
-    // Scroll indicator animation with GSAP
-    gsap.to('.scroll-indicator', {
-      y: 10,
-      duration: 1,
-      ease: 'power2.inOut',
-      yoyo: true,
-      repeat: -1
-    });
-    
-    // Floating animation for decorative elements
-    gsap.to('.hero-decoration', {
-      y: 15,
-      duration: 3,
-      ease: 'power2.inOut',
-      yoyo: true,
-      repeat: -1,
-      stagger: 0.5
-    });
-
     // Scroll indicator animation
     const handleScroll = () => {
       const scrolled = window.scrollY;
@@ -134,33 +147,30 @@
 <section
   id="hero"
   bind:this={heroElement}
-  class="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-br from-dark-100 via-dark-200 to-dark-100"
+  class="relative min-h-screen flex items-center justify-center bg-gradient-to-br from-gray-50 to-white overflow-hidden"
 >
-  <!-- Background particles -->
-  <div class="absolute inset-0 overflow-hidden">
-    <div class="absolute top-1/4 left-1/4 w-64 h-64 bg-accent/10 rounded-full blur-3xl animate-pulse"></div>
-    <div class="absolute bottom-1/4 right-1/4 w-96 h-96 bg-primary/10 rounded-full blur-3xl animate-pulse delay-1000"></div>
-    <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-32 h-32 bg-accent/20 rounded-full blur-2xl animate-bounce-slow"></div>
+  <div class="absolute bottom-16 right-20 animate-bounce" style="animation-delay: 0s; animation-duration: 1s;">
+    <img src={golangSvg} alt="Golang" class="w-12 h-12" />
   </div>
 
-  <div class="container mx-auto px-6 relative z-10">
+  <div class="container mx-auto px-6 relative z-10 overflow-hidden">
     <div class="grid lg:grid-cols-2 gap-12 items-center">
       <!-- Content -->
       <div class="text-center lg:text-left animate-fade-in">
         <div class="mb-6">
-          <p class="hero-greeting text-accent font-medium mb-2 tracking-wide uppercase text-sm">
+          <p class="hero-greeting text-text-primary font-medium mb-2 tracking-wide uppercase text-sm">
             Welcome to my cave !
           </p>
-          <h1 class="hero-name text-4xl md:text-6xl lg:text-7xl font-bold text-white mb-4 leading-tight">
+          <h1 class="hero-name text-4xl md:text-6xl lg:text-7xl font-bold text-gray-900 mb-4 leading-tight">
             Hi, I'm <span class="text-gradient">{personalInfo.name}</span>
           </h1>
-          <div class="hero-role text-2xl md:text-3xl lg:text-4xl text-gray-300 mb-6 h-12 flex items-center justify-center lg:justify-start">
+          <div class="hero-role text-2xl md:text-3xl lg:text-4xl text-gray-600 mb-6 h-12 flex items-center justify-center lg:justify-start">
             <span>I'm a </span>
-            <span class="text-accent ml-2 font-semibold min-w-[200px] text-left">
+            <span class="text-text-primary ml-2 font-semibold min-w-[200px] text-left">
               {typedText}<span class="animate-pulse">|</span>
             </span>
           </div>
-          <p class="hero-bio text-lg text-gray-400 mb-8 max-w-2xl mx-auto lg:mx-0 leading-relaxed">
+          <p class="hero-bio text-lg text-gray-600 mb-8 max-w-2xl mx-auto lg:mx-0 leading-relaxed">
             {personalInfo.bio}
           </p>
         </div>
@@ -168,16 +178,16 @@
         <!-- Stats -->
         <div class="hero-stats grid grid-cols-3 gap-6 mb-8">
           <div class="text-center lg:text-left">
-            <div class="text-2xl md:text-3xl font-bold text-accent">{personalInfo.stats.experience}</div>
-            <div class="text-sm text-gray-400 uppercase tracking-wide">Experience</div>
+            <div class="text-2xl md:text-3xl font-bold text-text-primary">{personalInfo.stats.experience}</div>
+            <div class="text-sm text-gray-500 uppercase tracking-wide">Experience</div>
           </div>
           <div class="text-center lg:text-left">
-            <div class="text-2xl md:text-3xl font-bold text-accent">{personalInfo.stats.projects}</div>
-            <div class="text-sm text-gray-400 uppercase tracking-wide">Projects</div>
+            <div class="text-2xl md:text-3xl font-bold text-text-primary">{personalInfo.stats.projects}</div>
+            <div class="text-sm text-gray-500 uppercase tracking-wide">Projects</div>
           </div>
           <div class="text-center lg:text-left">
-            <div class="text-2xl md:text-3xl font-bold text-accent">{personalInfo.stats.clients}</div>
-            <div class="text-sm text-gray-400 uppercase tracking-wide">Clients</div>
+            <div class="text-2xl md:text-3xl font-bold text-text-primary">{personalInfo.stats.clients}</div>
+            <div class="text-sm text-gray-500 uppercase tracking-wide">Clients</div>
           </div>
         </div>
 
@@ -185,7 +195,7 @@
         <div class="hero-buttons flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
           <a
             href="/contact"
-            class="bg-accent text-dark-100 px-8 py-4 rounded-lg font-semibold hover:bg-accent/90 transition-all duration-300 hover:scale-105 flex items-center justify-center gap-2"
+            class="bg-accent text-white px-8 py-4 rounded-lg font-semibold hover:bg-accent/90 transition-all duration-300 hover:scale-105 flex items-center justify-center gap-2 shadow-lg"
           >
             <Mail size={20} />
             Get In Touch
@@ -194,7 +204,7 @@
             href={personalInfo.resume}
             target="_blank"
             rel="noopener noreferrer"
-            class="border-2 border-accent text-accent px-8 py-4 rounded-lg font-semibold hover:bg-accent hover:text-dark-100 transition-all duration-300 hover:scale-105 flex items-center justify-center gap-2"
+            class="border-2 border-accent text-accent px-8 py-4 rounded-lg font-semibold hover:bg-accent hover:text-white transition-all duration-300 hover:scale-105 flex items-center justify-center gap-2"
           >
             <Download size={20} />
             Download CV
@@ -203,14 +213,12 @@
       </div>
 
       <!-- Profile Image -->
-      <div class="hero-image flex justify-center lg:justify-end">
-        <div class="relative">
-          <!-- Decorative elements -->
-          <div class="hero-decoration absolute -top-4 -left-4 w-72 h-72 bg-accent/20 rounded-full blur-2xl animate-pulse"></div>
-          <div class="hero-decoration absolute -bottom-4 -right-4 w-64 h-64 bg-primary/20 rounded-full blur-2xl animate-pulse delay-500"></div>
+      <div class="hero-image flex justify-center lg:justify-end overflow-hidden">
+        <div class="relative overflow-hidden">
+          <!-- Removed decorative circles to clean up the design -->
           
           <!-- Profile image container -->
-          <div class="relative z-10 w-80 h-80 rounded-full overflow-hidden border-4 border-accent/30 shadow-2xl">
+          <div class="relative z-10 w-64 h-64 md:w-80 md:h-80 rounded-full overflow-hidden border-4 border-gray-700/50">
             <img
               src={personalInfo.avatar}
               alt={personalInfo.name}
@@ -218,9 +226,7 @@
             />
           </div>
           
-          <!-- Floating elements -->
-          <div class="hero-decoration absolute top-8 -right-8 w-16 h-16 bg-accent/20 rounded-full animate-bounce-slow"></div>
-          <div class="hero-decoration absolute -bottom-8 -left-8 w-12 h-12 bg-primary/20 rounded-full animate-bounce-slow delay-1000"></div>
+
         </div>
       </div>
     </div>
@@ -229,7 +235,7 @@
   <!-- Scroll indicator -->
   <button
     on:click={scrollToNext}
-    class="scroll-indicator absolute bottom-8 left-1/2 transform -translate-x-1/2 text-white hover:text-accent transition-colors animate-bounce cursor-pointer"
+    class="scroll-indicator absolute bottom-8 left-1/2 transform -translate-x-1/2 text-gray-600 hover:text-accent transition-colors animate-bounce cursor-pointer"
     aria-label="Scroll to next section"
   >
     <ChevronDown size={32} />
@@ -287,4 +293,6 @@
       transform: translate3d(0, -2px, 0);
     }
   }
+
+
 </style>

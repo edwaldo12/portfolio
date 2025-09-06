@@ -1,380 +1,259 @@
-<script>
+<script lang="ts">
   import { onMount } from 'svelte';
-  import { fade } from 'svelte/transition';
+  import { browser } from '$app/environment';
+  import { personalInfo } from '$lib/data/personal';
 
-  let { isLoading = $bindable(true), onComplete = () => {} } = $props();
+  export let isVisible = true;
+  export let onComplete: () => void = () => {};
 
-  let progress = $state(0);
-  let showContent = $state(false);
+  let loadingContainer: HTMLElement;
+  let logoText: HTMLElement;
+  let subtitle: HTMLElement;
+  let progressBar: HTMLElement;
+  let dots: HTMLElement[] = [];
 
-  onMount(() => {
-    // Simulate loading progress
-    const progressInterval = setInterval(() => {
-      progress += Math.random() * 15;
-      if (progress >= 100) {
-        progress = 100;
-        clearInterval(progressInterval);
-        
-        // Wait a bit then start fade out
-        setTimeout(() => {
-          showContent = true;
-          setTimeout(() => {
-            isLoading = false;
-            onComplete();
-          }, 800);
-        }, 500);
-      }
-    }, 100);
+  // Browser-only GSAP import
+  let gsap: any;
+  
+  async function initGSAP() {
+    if (browser && !gsap) {
+      const gsapModule = await import('gsap');
+      gsap = gsapModule.gsap;
+    }
+    return gsap;
+  }
 
-    return () => clearInterval(progressInterval);
+  onMount(async () => {
+    if (!browser) return;
+    
+    const gsapInstance = await initGSAP();
+    if (!gsapInstance) return;
+
+    // Initial state - everything hidden
+    gsapInstance.set([logoText, subtitle, progressBar], {
+      opacity: 0,
+      y: 30
+    });
+
+    // Animate dots with much slower, more elegant timing
+    dots.forEach((dot, index) => {
+      gsapInstance.set(dot, { scale: 0.3, opacity: 0.2 });
+      gsapInstance.to(dot, {
+        scale: 1.2,
+        opacity: 0.8,
+        duration: 2.5,
+        delay: index * 0.4,
+        repeat: -1,
+        yoyo: true,
+        ease: 'power2.inOut'
+      });
+    });
+
+    // Main animation sequence with much slower, premium timing
+    const tl = gsapInstance.timeline();
+    
+    // Name "Edwaldo": 1.5s delay + 2s fade-in duration
+    tl.to(logoText, {
+      opacity: 1,
+      y: 0,
+      duration: 2,
+      delay: 1.5,
+      ease: 'power3.out'
+    })
+    // Add breathing effect to the logo text
+    .to(logoText, {
+      scale: 1.02,
+      duration: 1.5,
+      repeat: -1,
+      yoyo: true,
+      ease: 'power2.inOut'
+    }, '-=0.5')
+    // Subtitle "Fullstack Engineer": 3s delay + 1.5s duration
+    .to(subtitle, {
+      opacity: 1,
+      y: 0,
+      duration: 1.5,
+      delay: 1,
+      ease: 'power3.out'
+    }, '-=1')
+    // Progress bar appears with delay
+    .to(progressBar, {
+      opacity: 1,
+      y: 0,
+      duration: 1.2,
+      delay: 0.8,
+      ease: 'power3.out'
+    }, '-=0.5')
+    // Very slow 5-6 second fill animation
+    .to(progressBar.querySelector('.progress-fill'), {
+      width: '100%',
+      duration: 6,
+      delay: 0.5,
+      ease: 'power1.inOut'
+    }, '-=0.5');
+
+    // Auto-hide after much longer duration for premium feel (10 seconds total)
+    setTimeout(() => {
+      hideLoadingScreen();
+    }, 10000);
   });
+
+  async function hideLoadingScreen() {
+    if (!browser) return;
+    
+    const gsapInstance = await initGSAP();
+    if (!gsapInstance) return;
+
+    // Much slower, more luxurious fade-out with staggered elements
+    const tl = gsapInstance.timeline();
+    
+    // First fade out the progress bar and dots
+    tl.to([progressBar, ...dots], {
+      opacity: 0,
+      y: -20,
+      duration: 0.8,
+      stagger: 0.1,
+      ease: 'power2.inOut'
+    })
+    // Then fade out subtitle
+    .to(subtitle, {
+      opacity: 0,
+      y: -30,
+      duration: 1,
+      ease: 'power2.inOut'
+    }, '-=0.4')
+    // Then fade out logo with scale effect
+    .to(logoText, {
+      opacity: 0,
+      y: -40,
+      scale: 0.95,
+      duration: 1.2,
+      ease: 'power2.inOut'
+    }, '-=0.6')
+    // Finally fade out the entire container
+    .to(loadingContainer, {
+      opacity: 0,
+      duration: 1.5,
+      ease: 'power3.inOut',
+      onComplete: () => {
+        isVisible = false;
+        onComplete();
+      }
+    }, '-=0.8');
+  }
 </script>
 
-{#if isLoading}
+{#if isVisible}
   <div 
-    class="loading-screen" 
-    class:fade-out={showContent}
-    transition:fade={{ duration: 800 }}
+    bind:this={loadingContainer}
+    class="fixed inset-0 z-[10000] bg-white flex items-center justify-center overflow-hidden"
   >
-    <div class="loading-container">
-      <!-- Main Logo/Name Animation -->
-      <div class="logo-container">
-        <div class="logo-text">
-          <span class="first-name">Edwaldo</span>
-          <span class="last-name">Utama</span>
-        </div>
-        <div class="logo-subtitle">Fullstack Engineer</div>
+    <!-- Enhanced Background Pattern with Gradual Transitions -->
+    <div class="absolute inset-0 opacity-8">
+      <div class="absolute inset-0 bg-gradient-to-br from-accent/8 via-accent/3 via-transparent to-accent/5"></div>
+      <div class="absolute top-1/4 left-1/4 w-96 h-96 bg-accent/4 rounded-full blur-3xl animate-pulse-slow"></div>
+      <div class="absolute bottom-1/4 right-1/4 w-96 h-96 bg-accent/3 rounded-full blur-3xl animate-pulse-slow" style="animation-delay: 2s;"></div>
+      <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-accent/2 rounded-full blur-[100px] animate-pulse-slow" style="animation-delay: 4s;"></div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="relative text-center px-8">
+      <!-- Logo/Name -->
+      <div bind:this={logoText} class="mb-4">
+        <h1 class="text-5xl md:text-7xl font-bold text-gray-900 tracking-tight">
+          {personalInfo.name.split(' ')[0]}
+        </h1>
+        <div class="w-24 h-1 bg-accent mx-auto mt-4 rounded-full"></div>
       </div>
 
-      <!-- Loading Animation -->
-      <div class="loading-animation">
-        <div class="spinner">
-          <div class="spinner-ring"></div>
-          <div class="spinner-ring"></div>
-          <div class="spinner-ring"></div>
-        </div>
+      <!-- Subtitle -->
+      <div bind:this={subtitle} class="mb-12">
+        <p class="text-xl md:text-2xl text-gray-600 font-light tracking-wide">
+          Fullstack Engineer
+        </p>
       </div>
 
       <!-- Progress Bar -->
-      <div class="progress-container">
-        <div class="progress-bar">
-          <div class="progress-fill" style="width: {progress}%"></div>
+      <div bind:this={progressBar} class="mb-8">
+        <div class="w-64 h-1 bg-gray-300 rounded-full mx-auto overflow-hidden">
+          <div class="progress-fill h-full bg-gradient-to-r from-accent to-green-400 rounded-full w-0"></div>
         </div>
-        <div class="progress-text">{Math.round(progress)}%</div>
+      </div>
+
+      <!-- Loading Dots -->
+      <div class="flex justify-center space-x-2">
+        {#each Array(3) as _, i}
+          <div 
+            bind:this={dots[i]}
+            class="w-3 h-3 bg-accent rounded-full"
+          ></div>
+        {/each}
+      </div>
+
+      <!-- Loading Text -->
+      <div class="mt-6">
+        <p class="text-sm text-gray-500 tracking-widest uppercase">
+          Loading Experience
+        </p>
       </div>
     </div>
 
-    <!-- Background Animation -->
-    <div class="bg-animation">
-      <div class="floating-shapes">
-        {#each Array(6) as _, i}
-          <div class="shape shape-{i + 1}"></div>
-        {/each}
-      </div>
-    </div>
+    <!-- Enhanced Decorative Elements with Slower Animations -->
+    <div class="absolute top-8 left-8 w-16 h-16 border border-accent/20 rounded-full animate-pulse-slow"></div>
+    <div class="absolute bottom-8 right-8 w-12 h-12 border border-accent/15 rounded-full animate-pulse-slow" style="animation-delay: 1.2s;"></div>
+    <div class="absolute top-1/3 right-16 w-8 h-8 border border-accent/12 rounded-full animate-pulse-slow" style="animation-delay: 2.4s;"></div>
+    <div class="absolute top-16 right-8 w-6 h-6 bg-accent/8 rounded-full animate-pulse-slow" style="animation-delay: 3.6s;"></div>
+    <div class="absolute bottom-1/3 left-12 w-10 h-10 border border-accent/10 rounded-full animate-pulse-slow" style="animation-delay: 4.8s;"></div>
+    
+    <!-- Additional floating elements -->
+    <div class="absolute top-1/4 left-1/3 w-2 h-2 bg-accent/20 rounded-full animate-float" style="animation-delay: 1s;"></div>
+    <div class="absolute bottom-1/4 right-1/3 w-3 h-3 bg-accent/15 rounded-full animate-float" style="animation-delay: 2.5s;"></div>
   </div>
 {/if}
 
 <style>
-  .loading-screen {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 50%, #0f0f0f 100%);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    z-index: 9999;
-    overflow: hidden;
-  }
-
-  .loading-screen.fade-out {
-    opacity: 0;
-    transition: opacity 0.8s ease-out;
-  }
-
-  .loading-container {
-    text-align: center;
-    position: relative;
-    z-index: 2;
-  }
-
-  .logo-container {
-    margin-bottom: 3rem;
-    animation: logoFadeIn 1s ease-out;
-  }
-
-  .logo-text {
-    font-size: clamp(2.5rem, 5vw, 4rem);
-    font-weight: 700;
-    margin-bottom: 0.5rem;
-    position: relative;
-  }
-
-  .first-name {
-    color: #ffffff;
-    display: inline-block;
-    animation: slideInLeft 0.8s ease-out;
-  }
-
-  .last-name {
-    color: #00d4aa;
-    display: inline-block;
-    margin-left: 0.5rem;
-    animation: slideInRight 0.8s ease-out 0.2s both;
-  }
-
-  .logo-subtitle {
-    font-size: 1.2rem;
-    color: #888;
-    font-weight: 300;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    animation: fadeInUp 1s ease-out 0.4s both;
-  }
-
-  .loading-animation {
-    margin: 2rem 0;
-    display: flex;
-    justify-content: center;
-  }
-
-  .spinner {
-    position: relative;
-    width: 80px;
-    height: 80px;
-  }
-
-  .spinner-ring {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    border: 2px solid transparent;
-    border-radius: 50%;
-    animation: spin 2s linear infinite;
-  }
-
-  .spinner-ring:nth-child(1) {
-    border-top-color: #00d4aa;
-    animation-duration: 1.5s;
-  }
-
-  .spinner-ring:nth-child(2) {
-    border-right-color: #ffffff;
-    animation-duration: 2s;
-    animation-direction: reverse;
-    width: 70%;
-    height: 70%;
-    top: 15%;
-    left: 15%;
-  }
-
-  .spinner-ring:nth-child(3) {
-    border-bottom-color: #00d4aa;
-    animation-duration: 2.5s;
-    width: 40%;
-    height: 40%;
-    top: 30%;
-    left: 30%;
-  }
-
-  .progress-container {
-    margin-top: 2rem;
-    animation: fadeInUp 1s ease-out 0.6s both;
-  }
-
-  .progress-bar {
-    width: 200px;
-    height: 2px;
-    background: rgba(255, 255, 255, 0.1);
-    border-radius: 1px;
-    margin: 0 auto 1rem;
-    overflow: hidden;
-  }
-
-  .progress-fill {
-    height: 100%;
-    background: linear-gradient(90deg, #00d4aa, #ffffff);
-    border-radius: 1px;
-    transition: width 0.3s ease;
-  }
-
-  .progress-text {
-    color: #888;
-    font-size: 0.9rem;
-    font-weight: 300;
-  }
-
-  .bg-animation {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    overflow: hidden;
-    z-index: 1;
-  }
-
-  .floating-shapes {
-    position: relative;
-    width: 100%;
-    height: 100%;
-  }
-
-  .shape {
-    position: absolute;
-    background: rgba(0, 212, 170, 0.1);
-    border-radius: 50%;
-    animation: float 6s ease-in-out infinite;
-  }
-
-  .shape-1 {
-    width: 100px;
-    height: 100px;
-    top: 20%;
-    left: 10%;
-    animation-delay: 0s;
-  }
-
-  .shape-2 {
-    width: 60px;
-    height: 60px;
-    top: 60%;
-    right: 15%;
-    animation-delay: 1s;
-  }
-
-  .shape-3 {
-    width: 80px;
-    height: 80px;
-    bottom: 20%;
-    left: 20%;
-    animation-delay: 2s;
-  }
-
-  .shape-4 {
-    width: 40px;
-    height: 40px;
-    top: 30%;
-    right: 30%;
-    animation-delay: 3s;
-  }
-
-  .shape-5 {
-    width: 120px;
-    height: 120px;
-    bottom: 30%;
-    right: 10%;
-    animation-delay: 4s;
-  }
-
-  .shape-6 {
-    width: 70px;
-    height: 70px;
-    top: 10%;
-    left: 50%;
-    animation-delay: 5s;
-  }
-
-  /* Animations */
-  @keyframes logoFadeIn {
-    from {
-      opacity: 0;
-      transform: translateY(30px);
+  @keyframes pulse {
+    0%, 100% {
+      opacity: 0.2;
+      transform: scale(1);
     }
-    to {
-      opacity: 1;
-      transform: translateY(0);
+    50% {
+      opacity: 0.5;
+      transform: scale(1.05);
     }
   }
 
-  @keyframes slideInLeft {
-    from {
-      opacity: 0;
-      transform: translateX(-50px);
+  @keyframes pulse-slow {
+    0%, 100% {
+      opacity: 0.1;
+      transform: scale(0.95);
     }
-    to {
-      opacity: 1;
-      transform: translateX(0);
-    }
-  }
-
-  @keyframes slideInRight {
-    from {
-      opacity: 0;
-      transform: translateX(50px);
-    }
-    to {
-      opacity: 1;
-      transform: translateX(0);
-    }
-  }
-
-  @keyframes fadeInUp {
-    from {
-      opacity: 0;
-      transform: translateY(20px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
-
-  @keyframes spin {
-    from {
-      transform: rotate(0deg);
-    }
-    to {
-      transform: rotate(360deg);
+    50% {
+      opacity: 0.6;
+      transform: scale(1.08);
     }
   }
 
   @keyframes float {
     0%, 100% {
-      transform: translateY(0px) rotate(0deg);
-      opacity: 0.1;
-    }
-    50% {
-      transform: translateY(-20px) rotate(180deg);
+      transform: translateY(0px) scale(1);
       opacity: 0.3;
     }
-  }
-
-  /* Responsive Design */
-  @media (max-width: 768px) {
-    .logo-text {
-      font-size: 2.5rem;
+    33% {
+      transform: translateY(-8px) scale(1.1);
+      opacity: 0.7;
     }
-    
-    .logo-subtitle {
-      font-size: 1rem;
-    }
-    
-    .spinner {
-      width: 60px;
-      height: 60px;
-    }
-    
-    .progress-bar {
-      width: 150px;
+    66% {
+      transform: translateY(4px) scale(0.9);
+      opacity: 0.5;
     }
   }
 
-  @media (max-width: 480px) {
-    .logo-text {
-      font-size: 2rem;
-    }
-    
-    .first-name, .last-name {
-      display: block;
-      margin: 0;
-    }
-    
-    .last-name {
-      margin-top: 0.2rem;
-    }
+  .animate-pulse-slow {
+    animation: pulse-slow 4s cubic-bezier(0.25, 0.46, 0.45, 0.94) infinite;
+  }
+
+  .animate-float {
+    animation: float 6s cubic-bezier(0.25, 0.46, 0.45, 0.94) infinite;
   }
 </style>

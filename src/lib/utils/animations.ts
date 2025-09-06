@@ -1,12 +1,28 @@
-import { gsap } from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { browser } from '$app/environment';
 
-// Register ScrollTrigger plugin
-gsap.registerPlugin(ScrollTrigger);
+// Browser-only GSAP imports to prevent SSR issues
+let gsap: any;
+let ScrollTrigger: any;
+
+// Initialize GSAP modules
+async function initGSAP() {
+  if (browser && !gsap) {
+    const gsapModule = await import('gsap');
+    const scrollTriggerModule = await import('gsap/ScrollTrigger');
+    gsap = gsapModule.gsap;
+    ScrollTrigger = scrollTriggerModule.ScrollTrigger;
+    gsap.registerPlugin(ScrollTrigger);
+  }
+  return { gsap, ScrollTrigger };
+}
 
 // Animation utilities for consistent animations across components
 export class AnimationUtils {
-  static fadeInUp(element: Element, options: { delay?: number } | number = 0) {
+  static async fadeInUp(element: Element, options: { delay?: number } | number = 0) {
+    if (!browser) return;
+    const { gsap } = await initGSAP();
+    if (!gsap) return;
+    
     const delay = typeof options === 'number' ? options : options.delay || 0;
     gsap.fromTo(element, 
       {
@@ -23,7 +39,11 @@ export class AnimationUtils {
     );
   }
 
-  static fadeInLeft(element: Element, options: { delay?: number } | number = 0) {
+  static async fadeInLeft(element: Element, options: { delay?: number } | number = 0) {
+    if (!browser) return;
+    const { gsap } = await initGSAP();
+    if (!gsap) return;
+    
     const delay = typeof options === 'number' ? options : options.delay || 0;
     gsap.fromTo(element,
       {
@@ -40,7 +60,11 @@ export class AnimationUtils {
     );
   }
 
-  static fadeInRight(element: Element, options: { delay?: number } | number = 0) {
+  static async fadeInRight(element: Element, options: { delay?: number } | number = 0) {
+    if (!browser) return;
+    const { gsap } = await initGSAP();
+    if (!gsap) return;
+    
     const delay = typeof options === 'number' ? options : options.delay || 0;
     gsap.fromTo(element,
       {
@@ -57,7 +81,11 @@ export class AnimationUtils {
     );
   }
 
-  static scaleIn(element: Element, delay: number = 0) {
+  static async scaleIn(element: Element, delay: number = 0) {
+    if (!browser) return;
+    const { gsap } = await initGSAP();
+    if (!gsap) return;
+    
     gsap.fromTo(element,
       {
         opacity: 0,
@@ -73,27 +101,33 @@ export class AnimationUtils {
     );
   }
 
-  static staggerAnimation(elements: NodeListOf<Element> | Element[], animation: string = 'fadeInUp') {
-    elements.forEach((element, index) => {
+  static async staggerAnimation(elements: NodeListOf<Element> | Element[], animation: string = 'fadeInUp') {
+    if (!browser) return;
+    
+    elements.forEach(async (element, index) => {
       const delay = index * 0.1;
       switch (animation) {
         case 'fadeInUp':
-          this.fadeInUp(element, delay);
+          await this.fadeInUp(element, delay);
           break;
         case 'fadeInLeft':
-          this.fadeInLeft(element, delay);
+          await this.fadeInLeft(element, delay);
           break;
         case 'fadeInRight':
-          this.fadeInRight(element, delay);
+          await this.fadeInRight(element, delay);
           break;
         case 'scaleIn':
-          this.scaleIn(element, delay);
+          await this.scaleIn(element, delay);
           break;
       }
     });
   }
 
-  static scrollTriggerAnimation(element: Element, animation: any) {
+  static async scrollTriggerAnimation(element: Element, animation: any) {
+    if (!browser) return;
+    const { gsap } = await initGSAP();
+    if (!gsap) return;
+    
     const scrollTriggerConfig = animation.scrollTrigger || {};
     gsap.fromTo(element, animation.from || {}, {
       ...animation.to,
@@ -118,7 +152,11 @@ export class AnimationUtils {
     });
   }
 
-  static progressBarAnimation(element: Element, targetWidth: number, duration: number = 1.5) {
+  static async progressBarAnimation(element: Element, targetWidth: number, duration: number = 1.5) {
+    if (!browser) return;
+    const { gsap } = await initGSAP();
+    if (!gsap) return;
+    
     gsap.fromTo(element,
       { width: '0%' },
       {
@@ -129,7 +167,11 @@ export class AnimationUtils {
     );
   }
 
-  static parallaxEffect(element: Element, speed: number = 0.5) {
+  static async parallaxEffect(element: Element, speed: number = 0.5) {
+    if (!browser) return;
+    const { gsap } = await initGSAP();
+    if (!gsap) return;
+    
     gsap.to(element, {
       yPercent: -50 * speed,
       ease: 'none',
@@ -142,7 +184,11 @@ export class AnimationUtils {
     });
   }
 
-  static hoverScale(element: Element, scale: number = 1.05) {
+  static async hoverScale(element: Element, scale: number = 1.05) {
+    if (!browser) return;
+    const { gsap } = await initGSAP();
+    if (!gsap) return;
+    
     element.addEventListener('mouseenter', () => {
       gsap.to(element, {
         scale,
@@ -160,7 +206,11 @@ export class AnimationUtils {
     });
   }
 
-  static magneticEffect(element: Element, strength: number = 0.3) {
+  static async magneticEffect(element: Element, strength: number = 0.3) {
+    if (!browser) return;
+    const { gsap } = await initGSAP();
+    if (!gsap) return;
+    
     element.addEventListener('mousemove', (e: Event) => {
       const mouseEvent = e as MouseEvent;
       const rect = element.getBoundingClientRect();
@@ -185,7 +235,11 @@ export class AnimationUtils {
     });
   }
 
-  static infiniteRotation(element: Element, duration: number = 10) {
+  static async infiniteRotation(element: Element, duration: number = 10) {
+    if (!browser) return;
+    const { gsap } = await initGSAP();
+    if (!gsap) return;
+    
     gsap.to(element, {
       rotation: 360,
       duration,
@@ -194,7 +248,11 @@ export class AnimationUtils {
     });
   }
 
-  static floatingAnimation(element: Element, distance: number = 10, duration: number = 3) {
+  static async floatingAnimation(element: Element, distance: number = 10, duration: number = 3) {
+    if (!browser) return;
+    const { gsap } = await initGSAP();
+    if (!gsap) return;
+    
     gsap.to(element, {
       y: distance,
       duration,

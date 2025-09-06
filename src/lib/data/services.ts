@@ -70,6 +70,26 @@ export const services: Service[] = [
     priceRange: 'Contact for Quote',
     deliveryTime: 'Contact for Timeline',
     category: 'development'
+  },
+  {
+    id: 'service-4',
+    title: 'Content Management System',
+    description: 'Custom CMS solutions with intuitive admin panels, content workflows, and multi-user management for seamless content operations.',
+    longDescription: 'I develop comprehensive Content Management Systems tailored to your business needs. From simple blogs to complex enterprise content platforms, I create intuitive admin interfaces, robust content workflows, and scalable architectures that empower your team to manage content efficiently.',
+    icon: 'settings',
+    features: [
+      'Custom Admin Dashboard',
+      'Multi-user Role Management',
+      'Content Workflow & Publishing',
+      'Media Library Management',
+      'SEO Optimization Tools',
+      'API Integration Support',
+      'Responsive Content Editor',
+      'Version Control & Backup'
+    ],
+    priceRange: 'Contact for Quote',
+    deliveryTime: 'Contact for Timeline',
+    category: 'development'
   }
 ];
 

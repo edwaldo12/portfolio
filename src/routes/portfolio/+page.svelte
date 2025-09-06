@@ -8,6 +8,6 @@
   <meta name="description" content="Explore {personalInfo.name}'s portfolio showcasing innovative web applications and development projects." />
 </svelte:head>
 
-<main class="min-h-screen bg-gradient-to-br from-dark-100 via-dark-200 to-dark-100">
+<main class="min-h-screen bg-gradient-to-br from-gray-50 via-white to-gray-100">
   <Portfolio />
 </main>

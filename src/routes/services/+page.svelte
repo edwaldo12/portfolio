@@ -8,6 +8,6 @@
   <meta name="description" content="Discover the professional services offered by {personalInfo.name}, including web development, consulting, and more." />
 </svelte:head>
 
-<main class="min-h-screen bg-gradient-to-br from-dark-100 via-dark-200 to-dark-100">
+<main class="min-h-screen bg-gradient-to-br from-gray-50 via-white to-gray-100">
   <Services />
 </main>
