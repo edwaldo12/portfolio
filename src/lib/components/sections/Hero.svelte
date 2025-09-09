@@ -249,25 +249,9 @@
     -webkit-text-fill-color: transparent;
     background-clip: text;
   }
-
-  .animate-bounce-slow {
-    animation: bounce 3s infinite;
-  }
-
   .animate-fade-in {
     animation: fadeIn 1s ease-out;
   }
-
-
-
-  .delay-500 {
-    animation-delay: 0.5s;
-  }
-
-  .delay-1000 {
-    animation-delay: 1s;
-  }
-
   @keyframes fadeIn {
     from {
       opacity: 0;

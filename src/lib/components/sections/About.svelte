@@ -140,10 +140,10 @@
             <!-- Timeline Line -->
             <div class="absolute left-4 top-0 bottom-0 w-0.5 bg-gray-300"></div>
             
-            {#each experiences as experience, index}
+            {#each experiences as experience}
               <div class="timeline-item relative pl-12 pb-8 opacity-0">
                 <!-- Timeline Dot -->
-                <div class="absolute left-2 w-4 h-4 bg-text-primary rounded-full border-4 border-gray-50"></div>
+                <div class="absolute w-4 h-4 bg-text-primary rounded-full border-4 border-gray-50" style="left: 0.55rem"></div>
                 
                 <div class="bg-white rounded-lg p-6 border border-gray-200 hover:border-gray-300 transition-colors duration-300 shadow-sm">
                   <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-3">
@@ -184,7 +184,7 @@
             {#each education as edu, index}
               <div class="timeline-item relative pl-12 pb-8 opacity-0">
                 <!-- Timeline Dot -->
-                <div class="absolute left-2 w-4 h-4 bg-primary rounded-full border-4 border-gray-50"></div>
+                <div class="absolute w-4 h-4 bg-text-primary rounded-full border-4 border-gray-50" style="left: 0.55rem"></div>
                 
                 <div class="bg-white rounded-lg p-6 border border-gray-200 hover:border-primary/30 transition-colors duration-300 shadow-sm">
                   <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-3">
