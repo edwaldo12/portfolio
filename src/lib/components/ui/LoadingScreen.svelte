@@ -49,53 +49,50 @@
       });
     });
 
-    // Main animation sequence with much slower, premium timing
+    // Main animation sequence with lightning-fast timing
     const tl = gsapInstance.timeline();
-    
-    // Name "Edwaldo": 1.5s delay + 2s fade-in duration
+
+    // Name "Edwaldo": 0.4s delay + 0.7s fade-in duration
     tl.to(logoText, {
       opacity: 1,
       y: 0,
-      duration: 2,
-      delay: 1.5,
+      duration: 0.7,
+      delay: 0.4,
       ease: 'power3.out'
     })
     // Add breathing effect to the logo text
     .to(logoText, {
       scale: 1.02,
-      duration: 1.5,
+      duration: 0.6,
       repeat: -1,
       yoyo: true,
       ease: 'power2.inOut'
-    }, '-=0.5')
-    // Subtitle "Fullstack Engineer": 3s delay + 1.5s duration
+    }, '-=0.15')
+    // Subtitle "Fullstack Engineer" appears after logo
     .to(subtitle, {
       opacity: 1,
       y: 0,
-      duration: 1.5,
-      delay: 1,
+      duration: 0.6,
       ease: 'power3.out'
-    }, '-=1')
-    // Progress bar appears with delay
+    }, '-=0.4')
+    // Progress bar appears after subtitle
     .to(progressBar, {
       opacity: 1,
       y: 0,
-      duration: 1.2,
-      delay: 0.8,
+      duration: 0.5,
       ease: 'power3.out'
-    }, '-=0.5')
-    // Very slow 5-6 second fill animation
+    })
+    // Progress bar fills up
     .to(progressBar.querySelector('.progress-fill'), {
       width: '100%',
-      duration: 6,
-      delay: 0.5,
-      ease: 'power1.inOut'
-    }, '-=0.5');
+      duration: 1.2,
+      ease: 'power2.inOut'
+    }, '-=0.25');
 
-    // Auto-hide after much longer duration for premium feel (10 seconds total)
+    // Auto-hide after 2.8 seconds to allow progress bar to complete
     setTimeout(() => {
       hideLoadingScreen();
-    }, 10000);
+    }, 2800);
   });
 
   async function hideLoadingScreen() {

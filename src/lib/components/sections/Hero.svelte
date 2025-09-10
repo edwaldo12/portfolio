@@ -4,6 +4,7 @@
   import { ChevronDown, Download, Mail } from 'lucide-svelte';
   import { personalInfo } from '$lib/data/personal';
   import golangSvg from '$lib/assets/golang.svg';
+  import phpSvg from '$lib/assets/php.svg';
 
 
   // Browser-only GSAP import
@@ -151,6 +152,9 @@
 >
   <div class="absolute bottom-16 right-20 animate-bounce" style="animation-delay: 0s; animation-duration: 1s;">
     <img src={golangSvg} alt="Golang" class="w-12 h-12" />
+  </div>
+  <div class="absolute bottom-16 right-40 animate-bounce" style="animation-delay: 0s; animation-duration: 1s;">
+    <img src={phpSvg} alt="PHP" class="w-12 h-12" />
   </div>
 
   <div class="container mx-auto px-6 relative z-10 overflow-hidden">
