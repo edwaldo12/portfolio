@@ -90,6 +90,26 @@ export const services: Service[] = [
     priceRange: 'Contact for Quote',
     deliveryTime: 'Contact for Timeline',
     category: 'development'
+  },
+  {
+    id: 'service-5',
+    title: 'WhatsApp Order Bots (n8n + AI)',
+    description: 'Automated WhatsApp assistants that capture and triage customer orders using n8n workflows and AI-powered understanding.',
+    longDescription: 'I build conversational WhatsApp bots orchestrated with n8n and backed by AI so your customers can place and track orders instantly. From intent detection to inventory checks and payment hand-offs, each flow is tailored to your business rules and integrates with your existing stack.',
+    icon: 'message-circle',
+    features: [
+      'WhatsApp Business API or Cloud API setup',
+      'n8n workflow design & deployment',
+      'GPT-powered intent detection and responses',
+      'Order intake and validation automation',
+      'CRM / ERP / spreadsheet integrations',
+      'Fallback to human operator hand-off',
+      'Multilingual conversation support',
+      'Monitoring, logging, and analytics dashboards'
+    ],
+    priceRange: 'Contact for Quote',
+    deliveryTime: 'Contact for Timeline',
+    category: 'development'
   }
 ];
 

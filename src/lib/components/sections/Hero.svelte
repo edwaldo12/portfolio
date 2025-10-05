@@ -5,6 +5,14 @@
   import { personalInfo } from '$lib/data/personal';
   import golangSvg from '$lib/assets/golang.svg';
   import phpSvg from '$lib/assets/php.svg';
+  import nestjsSvg from '$lib/assets/nest-js.svg';
+  import rabbitMqSvg from '$lib/assets/rabbit-mq.svg';
+  import natsSvg from '$lib/assets/nats.svg';
+  import kafkaSvg from '$lib/assets/kafka.svg';
+  import jwtSvg from '$lib/assets/jwt.svg';
+  import nodeJsSvg from '$lib/assets/node-js.svg';
+  import postgresSvg from '$lib/assets/postgres.svg';
+  import mysqlSvg from '$lib/assets/mysql.svg';
 
 
   // Browser-only GSAP import
@@ -30,6 +38,16 @@
     'Web Developer',
     'Backend Engineer',
     'Frontend Engineer'
+  ];
+
+  const techIcons = [
+    { src: kafkaSvg, alt: 'Apache Kafka', delay: '0.3s' },
+    { src: natsSvg, alt: 'NATS', delay: '0.6s' },
+    { src: rabbitMqSvg, alt: 'RabbitMQ', delay: '0.9s' },
+    { src: nodeJsSvg, alt: 'NodeJS', delay: '1.2s' },
+    { src: nestjsSvg, alt: 'NestJS', delay: '1.5s' },
+    { src: phpSvg, alt: 'PHP', delay: '1.8s' },
+    { src: golangSvg, alt: 'Golang', delay: '2.1s' }
   ];
 
   onMount(() => {
@@ -74,10 +92,10 @@
         });
       }
       
-      // Scroll indicator animation
+      // Scroll indicator animation - subtle floating
       gsap.to('.scroll-indicator', {
-        y: 10,
-        duration: 1.5,
+        y: -5,
+        duration: 2,
         repeat: -1,
         yoyo: true,
         ease: 'power2.inOut'
@@ -91,6 +109,16 @@
         yoyo: true,
         ease: 'power2.inOut',
         stagger: 0.5
+      });
+
+      // Tech stack icons fade-in animation
+      gsap.to('.tech-icon', {
+        opacity: 1,
+        y: -10,
+        duration: 0.8,
+        ease: 'power2.out',
+        stagger: 0.2,
+        delay: 2
       });
     });
     
@@ -150,11 +178,25 @@
   bind:this={heroElement}
   class="relative min-h-screen flex items-center justify-center bg-gradient-to-br from-gray-50 to-white overflow-hidden"
 >
-  <div class="absolute bottom-16 right-20 animate-bounce" style="animation-delay: 0s; animation-duration: 1s;">
-    <img src={golangSvg} alt="Golang" class="w-12 h-12" />
-  </div>
-  <div class="absolute bottom-16 right-40 animate-bounce" style="animation-delay: 0s; animation-duration: 1s;">
-    <img src={phpSvg} alt="PHP" class="w-12 h-12" />
+  <div class="absolute bottom-16 right-20">
+    <div class="relative flex items-end gap-6">
+      {#each techIcons as icon}
+        <div class="tech-icon opacity-0" style={`animation-delay: ${icon.delay};`}>
+          <img src={icon.src} alt={icon.alt} class="w-12 h-12 transition-all duration-300 hover:scale-110 hover:rotate-6" />
+        </div>
+      {/each}
+      <div class="absolute right-0 top-full translate-y-3 flex gap-3">
+        <div class="tech-icon opacity-0" style="animation-delay: 2.2s;">
+          <img src={mysqlSvg} alt="MySQL" class="w-12 h-12 transition-all duration-300 hover:scale-110 hover:rotate-6" />
+        </div>
+        <div class="tech-icon opacity-0" style="animation-delay: 2.35s;">
+          <img src={postgresSvg} alt="PostgreSQL" class="w-10 h-10 transition-all duration-300 hover:scale-110 hover:rotate-6" />
+        </div>
+        <div class="tech-icon opacity-0" style="animation-delay: 2.5s;">
+          <img src={jwtSvg} alt="JWT" class="w-10 h-10 transition-all duration-300 hover:scale-110 hover:rotate-6" />
+        </div>
+      </div>
+    </div>
   </div>
 
   <div class="container mx-auto px-6 relative z-10 overflow-hidden">
@@ -239,7 +281,7 @@
   <!-- Scroll indicator -->
   <button
     on:click={scrollToNext}
-    class="scroll-indicator absolute bottom-8 left-1/2 transform -translate-x-1/2 text-gray-600 hover:text-accent transition-colors animate-bounce cursor-pointer"
+    class="scroll-indicator absolute bottom-8 left-1/2 transform -translate-x-1/2 text-gray-600 hover:text-accent transition-all duration-300 hover:scale-110 cursor-pointer"
     aria-label="Scroll to next section"
   >
     <ChevronDown size={32} />
@@ -267,20 +309,6 @@
     }
   }
 
-  @keyframes bounce {
-    0%, 20%, 53%, 80%, 100% {
-      transform: translate3d(0, 0, 0);
-    }
-    40%, 43% {
-      transform: translate3d(0, -15px, 0);
-    }
-    70% {
-      transform: translate3d(0, -7px, 0);
-    }
-    90% {
-      transform: translate3d(0, -2px, 0);
-    }
-  }
 
 
 </style>

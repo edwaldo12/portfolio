@@ -75,7 +75,11 @@ export const experiences: Experience[] = [
     location: 'Jakarta, Indonesia',
     description: 'Built loan status tracking system (Reschedule history, Appointment scheduling, etc) integrated with Goto, Tokopedia, Shopee and more. Engineered an event-driven architecture for the loan re-scheduling flow, focusing on status tracking directory and validation. This resulted in reducing latency from 5 seconds to under 0.5 seconds (measured at P95), while also enhancing readability and maintainability.',
     technologies: ['Golang', 'Solid.JS', 'TypeScript', 'Git', 'Microservices', 'JWT', 'PostgreSQL', 'Message Broker (RabbitMQ)', 'NATS', 'GCP', 'GWS', 'Grpc', 'Datadog'],
-    achievements: ['Reduced latency from 5 seconds to under 0.5 seconds', 'Achieved more than 95% unit test coverage', 'Implemented SQL/Clean Architecture with strict layer separation'],
+    achievements: [
+      'Rebuilt the loan rescheduling platform on an event-driven architecture, cutting partner-facing latency from 5 seconds to under 0.5 seconds across Goto, Tokopedia, and Shopee integrations',
+      'Hardened messaging flows with RabbitMQ dead-letter queues, Redis idempotency guards, and Slack/GWS alerting to eliminate duplicate processing and shrink incident response time',
+      'Kept core services above 95% SonarQube-verified unit coverage while enforcing Clean Architecture patterns to speed the rollout of new capabilities'
+    ],
     current: true
   },
   {
@@ -88,7 +92,11 @@ export const experiences: Experience[] = [
     location: 'Jakarta, Indonesia',
     description: 'Developed and maintained key features, including Master-Material, Real Estate Management, Customer Relationship Management, and modules for Contractors and Home-Buyers. Led continuous upgrades to enhance overall functionality and user experience of the application. Collaborated in daily Agile SDLC meetings, implementing design patterns tailored to specific use cases.',
     technologies: ['Golang', 'Next.js', 'Nest.js', 'Express', 'React.js', 'TypeScript', 'Git', 'Microservices', 'JWT', 'AXIOS', 'Redux', 'PostgreSQL', 'Message Broker (RabbitMQ)', 'GCP', 'Redis', 'Atomic Architecture', 'Websocket', 'Xendit'],
-    achievements: ['Led projects by driving strategic direction', 'Mentored junior team members', 'Facilitated effective collaboration and performed comprehensive code reviews'],
+    achievements: [
+      'Orchestrated the migration and rollout of a unified CRM and real-estate suite without disrupting day-to-day operations',
+      'Introduced service-to-service messaging and Atomic Design standards that boosted Next.js/React performance and UX consistency',
+      'Mentored a cross-functional squad and partnered with C-level stakeholders to shape roadmaps, code reviews, and delivery rituals'
+    ],
     current: false
   },
   {
@@ -101,7 +109,11 @@ export const experiences: Experience[] = [
     location: 'Jakarta, Indonesia',
     description: 'Developed and maintained key features such as budget management and task delegation in IProC, based on Functional Specification Documents (FSD) and user requests, ensuring efficient and user-friendly solutions. Integrated third-party APIs to consume data from pengadaan.com. Refactored deprecated code, updated libraries, and upgraded the framework.',
     technologies: ['PHP', 'CodeIgniter(4)', 'CSS', 'Bootstrap', 'ReactJS', 'TypeScript', 'MySQL', 'SQL Server', 'Express JS', 'Git', 'jQuery', 'Git', 'Microservices', 'Message Broker (NATS)'],
-    achievements: ['Analyzed and implemented business procurement workflows', 'Managed big data, optimizing and tuning SQL queries', 'Actively participated in an Agile environment with a small team'],
+    achievements: [
+      'Automated IProC budget and delegation workflows, integrating pengadaan.com data to deliver Phase 2b on schedule',
+      'Optimized high-volume SQL workloads and modernized legacy components, stabilizing procurement reporting for business stakeholders',
+      'Coordinated Agile releases with a lean team while upgrading a multi-vendor stack without downtime'
+    ],
     current: false
   },
   {
@@ -114,7 +126,11 @@ export const experiences: Experience[] = [
     location: 'Jakarta, Indonesia',
     description: 'Engineered and optimized robust features, significantly elevating the performance and security of a structured service-oriented database design and real-time socket communication. Employed Atomic Design principles and implemented key performance optimizations to enhance the efficiency and scalability of Next.js and React applications.',
     technologies: ['Golang', 'Next.js', 'Nest.js', 'Express', 'React.js', 'TypeScript', 'Git', 'Microservices', 'JWT', 'AXIOS', 'Redux', 'PostgreSQL', 'Message Broker (RabbitMQ)', 'GCP', 'Redis', 'Atomic Architecture', 'Websocket', 'Xendit'],
-    achievements: ['Developed and integrated a robust message broker', 'Employed Atomic Design principles', 'Implemented key performance optimizations'],
+    achievements: [
+      'Elevated capital-market platforms for BRI Danareksa, Bank Mega Syariah, and Bank Sampoerna by tuning 5M+ row databases and modernizing Node/PHP services',
+      'Led penetration-hardening initiatives and cross-team delivery to keep concurrent SCRUM projects on track',
+      'Integrated Jatis WhatsApp Blast and LDAP services, expanding contact-center automation and reliability'
+    ],
     current: false
   },
   {
@@ -127,7 +143,11 @@ export const experiences: Experience[] = [
     location: 'Jakarta, Indonesia',
     description: 'Developed and maintained web applications for automotive industry solutions. Built comprehensive inventory management systems and customer relationship management tools. Implemented responsive web interfaces and optimized database performance for high-volume transactions.',
     technologies: ['PHP', 'Laravel', 'MySQL', 'JavaScript', 'jQuery', 'Bootstrap', 'Git', 'REST APIs', 'HTML', 'CSS'],
-    achievements: ['Improved system performance by 40%', 'Developed inventory tracking system', 'Implemented automated reporting features'],
+    achievements: [
+      'Delivered an automotive inventory and CRM platform that improved dealer response times and data accuracy',
+      'Implemented automated reporting pipelines that removed manual reconciliation for operations teams',
+      'Crafted responsive web interfaces and database optimizations that kept high-volume transactions fast'
+    ],
     current: false
   },
   {
@@ -140,7 +160,11 @@ export const experiences: Experience[] = [
     location: 'Jakarta, Indonesia',
     description: 'Worked on enterprise software solutions and system integrations. Developed custom applications for business process automation and data management. Collaborated with cross-functional teams to deliver integrated solutions for various clients.',
     technologies: ['Java', 'Spring Boot', 'MySQL', 'JavaScript', 'React', 'Node.js', 'Git', 'REST APIs', 'Docker'],
-    achievements: ['Built automated workflow systems', 'Integrated multiple third-party services', 'Reduced manual processing time by 60%'],
+    achievements: [
+      'Delivered automated back-office workflows with custom Laravel and CodeIgniter services, reducing manual processing time by over 60%',
+      'Integrated partner systems through REST APIs that powered the organisation’s Android applications',
+      'Led stakeholder workshops and hands-on training to drive adoption of the new tooling'
+    ],
     current: false
   },
   {
@@ -153,7 +177,11 @@ export const experiences: Experience[] = [
     location: 'Palembang, Indonesia',
     description: 'Started career as junior developer working on various web development projects. Gained experience in full-stack development, database design, and client communication. Contributed to multiple client projects ranging from corporate websites to small business applications.',
     technologies: ['PHP', 'CodeIgniter', 'MySQL', 'JavaScript', 'jQuery', 'Bootstrap', 'HTML', 'CSS', 'Git'],
-    achievements: ['Completed 15+ client projects', 'Learned modern web development practices', 'Contributed to team knowledge sharing sessions'],
+    achievements: [
+      'Delivered a secure athlete score-tracking platform with REST APIs powering companion Android apps',
+      'Managed end-to-end delivery for 15+ client web projects, from requirements through launch and training',
+      'Led knowledge-sharing sessions that upskilled the team on modern web development practices'
+    ],
     current: false
   }
 ];

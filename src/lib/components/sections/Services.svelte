@@ -28,7 +28,8 @@
       'smartphone': Icons.Smartphone,
       'search': Icons.Search,
       'server': Icons.Server,
-      'zap': Icons.Zap
+      'zap': Icons.Zap,
+      'message-circle': Icons.MessageCircle
     };
     return iconMap[iconName] || Icons.Code;
   };
