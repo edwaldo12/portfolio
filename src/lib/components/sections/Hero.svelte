@@ -194,6 +194,12 @@
       nextSection.scrollIntoView({ behavior: 'smooth' });
     }
   };
+
+  const scrollToContact = (event: MouseEvent) => {
+    event.preventDefault();
+    const contactSection = document.querySelector<HTMLElement>('#contact');
+    contactSection?.scrollIntoView({ behavior: 'smooth' });
+  };
 </script>
 
 <section
@@ -290,7 +296,8 @@
         <!-- CTA Buttons -->
         <div class="hero-buttons flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
           <a
-            href="/contact"
+            href="#contact"
+            on:click|preventDefault={scrollToContact}
             class="bg-accent text-white px-8 py-4 rounded-lg font-semibold hover:bg-accent/90 transition-all duration-300 hover:scale-105 flex items-center justify-center gap-2 shadow-lg"
           >
             <Mail size={20} />
