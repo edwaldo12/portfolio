@@ -10,9 +10,22 @@
   import natsSvg from '$lib/assets/nats.svg';
   import kafkaSvg from '$lib/assets/kafka.svg';
   import jwtSvg from '$lib/assets/jwt.svg';
+  import arangodbSvg from '$lib/assets/arangodb.svg';
+  import mongodbSvg from '$lib/assets/mongodb.svg';
+  import temporalSvg from '$lib/assets/temporal.svg';
+  import redisSvg from '$lib/assets/redis.svg';
+  import k8sSvg from '$lib/assets/k8s.svg';
+  import gcpSvg from '$lib/assets/gcp.svg';
+  import ddogSvg from '$lib/assets/ddog.svg';
   import nodeJsSvg from '$lib/assets/node-js.svg';
   import postgresSvg from '$lib/assets/postgres.svg';
   import mysqlSvg from '$lib/assets/mysql.svg';
+  import typescriptSvg from '$lib/assets/typescript.svg';
+  import codeigniterSvg from '$lib/assets/codeigniter.svg';
+  import grpcSvg from '$lib/assets/grpc.svg';
+  import reactSvg from '$lib/assets/react.svg';
+  import nextjsSvg from '$lib/assets/next-js.svg';
+  import solidjsSvg from '$lib/assets/solid-js.svg';
 
 
   // Browser-only GSAP import
@@ -38,6 +51,16 @@
     'Web Developer',
     'Backend Engineer',
     'Frontend Engineer'
+  ];
+
+  const featuredTechIcon = [
+    { src: ddogSvg, alt: 'Datadog', delay: '0.6s', className: 'h-10' },
+    { src: gcpSvg, alt: 'Google Cloud', delay: '0.9s', className: 'h-10' },
+    { src: k8sSvg, alt: 'Kubernetes', delay: '1.2s', className: 'h-10' },
+    { src: redisSvg, alt: 'Redis', delay: '1.5s', className: 'h-10' },
+    { src: temporalSvg, alt: 'Temporal', delay: '1.8s', className: 'h-10 w-20' },
+    { src: mongodbSvg, alt: 'MongoDB', delay: '2.1s', className: 'h-10 w-20' },
+    { src: arangodbSvg, alt: 'ArangoDB', delay: '2.4s' }
   ];
 
   const techIcons = [
@@ -179,23 +202,50 @@
   class="relative min-h-screen flex items-center justify-center bg-gradient-to-br from-gray-50 to-white overflow-hidden"
 >
   <div class="absolute bottom-16 right-20">
-    <div class="relative flex items-end gap-6">
-      {#each techIcons as icon}
-        <div class="tech-icon opacity-0" style={`animation-delay: ${icon.delay};`}>
-          <img src={icon.src} alt={icon.alt} class="w-12 h-12 transition-all duration-300 hover:scale-110 hover:rotate-6" />
-        </div>
-      {/each}
-      <div class="absolute right-0 top-full translate-y-3 flex gap-3">
-        <div class="tech-icon opacity-0" style="animation-delay: 2.2s;">
-          <img src={mysqlSvg} alt="MySQL" class="w-12 h-12 transition-all duration-300 hover:scale-110 hover:rotate-6" />
-        </div>
-        <div class="tech-icon opacity-0" style="animation-delay: 2.35s;">
-          <img src={postgresSvg} alt="PostgreSQL" class="w-10 h-10 transition-all duration-300 hover:scale-110 hover:rotate-6" />
-        </div>
-        <div class="tech-icon opacity-0" style="animation-delay: 2.5s;">
-          <img src={jwtSvg} alt="JWT" class="w-10 h-10 transition-all duration-300 hover:scale-110 hover:rotate-6" />
-        </div>
+    <div class="relative flex flex-col items-end gap-3">
+      <div class="flex gap-6">
+        {#each featuredTechIcon as icon}
+          <div class="tech-icon opacity-0" style={`animation-delay: ${icon.delay};`}>
+            <img src={icon.src} alt={icon.alt} class={`transition-all duration-300 hover:scale-110 hover:rotate-6 ${icon.className ?? 'w-12 h-12'}`} />
+          </div>
+        {/each}
       </div>
+      <div class="flex gap-6">
+        {#each techIcons as icon}
+          <div class="tech-icon opacity-0" style={`animation-delay: ${icon.delay};`}>
+            <img src={icon.src} alt={icon.alt} class="w-12 h-12 transition-all duration-300 hover:scale-110 hover:rotate-6" />
+          </div>
+        {/each}
+      </div>
+      <div class="absolute right-0 top-full translate-y-3 flex gap-3 flex-wrap">
+         <div class="tech-icon opacity-0" style="animation-delay: 1.3s;">
+           <img src={solidjsSvg} alt="Solid.js" class="w-10 h-10 transition-all duration-300 hover:scale-110 hover:rotate-6" />
+         </div>
+         <div class="tech-icon opacity-0" style="animation-delay: 1.45s;">
+           <img src={nextjsSvg} alt="Next.js" class="w-10 h-10 transition-all duration-300 hover:scale-110 hover:rotate-6" />
+         </div>
+         <div class="tech-icon opacity-0" style="animation-delay: 1.6s;">
+           <img src={reactSvg} alt="React" class="w-10 h-10 transition-all duration-300 hover:scale-110 hover:rotate-6" />
+         </div>
+         <div class="tech-icon opacity-0" style="animation-delay: 1.75s;">
+           <img src={grpcSvg} alt="gRPC" class="w-10 h-10 transition-all duration-300 hover:scale-110 hover:rotate-6" />
+         </div>
+         <div class="tech-icon opacity-0" style="animation-delay: 1.9s;">
+           <img src={codeigniterSvg} alt="CodeIgniter" class="w-10 h-10 transition-all duration-300 hover:scale-110 hover:rotate-6" />
+         </div>
+         <div class="tech-icon opacity-0" style="animation-delay: 2.05s;">
+           <img src={typescriptSvg} alt="TypeScript" class="w-10 h-10 transition-all duration-300 hover:scale-110 hover:rotate-6" />
+         </div>
+         <div class="tech-icon opacity-0" style="animation-delay: 2.2s;">
+           <img src={mysqlSvg} alt="MySQL" class="w-12 h-12 transition-all duration-300 hover:scale-110 hover:rotate-6" />
+         </div>
+         <div class="tech-icon opacity-0" style="animation-delay: 2.35s;">
+           <img src={postgresSvg} alt="PostgreSQL" class="w-10 h-10 transition-all duration-300 hover:scale-110 hover:rotate-6" />
+         </div>
+         <div class="tech-icon opacity-0" style="animation-delay: 2.5s;">
+           <img src={jwtSvg} alt="JWT" class="w-10 h-10 transition-all duration-300 hover:scale-110 hover:rotate-6" />
+         </div>
+       </div>
     </div>
   </div>
 
