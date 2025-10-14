@@ -206,44 +206,44 @@
       <div class="flex gap-6">
         {#each featuredTechIcon as icon}
           <div class="tech-icon opacity-0" style={`animation-delay: ${icon.delay};`}>
-            <img src={icon.src} alt={icon.alt} class={`transition-all duration-300 hover:scale-110 hover:rotate-6 ${icon.className ?? 'w-12 h-12'}`} />
+            <img src={icon.src} alt={icon.alt} class={`transition-transform duration-300 hover:scale-125 hover:rotate-6 ${icon.className ?? 'w-12 h-12'}`} />
           </div>
         {/each}
       </div>
       <div class="flex gap-6">
         {#each techIcons as icon}
           <div class="tech-icon opacity-0" style={`animation-delay: ${icon.delay};`}>
-            <img src={icon.src} alt={icon.alt} class="w-12 h-12 transition-all duration-300 hover:scale-110 hover:rotate-6" />
+            <img src={icon.src} alt={icon.alt} class="w-12 h-12 transition-transform duration-300 hover:scale-125 hover:rotate-6" />
           </div>
         {/each}
       </div>
       <div class="absolute right-0 top-full translate-y-3 flex gap-3 flex-wrap">
          <div class="tech-icon opacity-0" style="animation-delay: 1.3s;">
-           <img src={solidjsSvg} alt="Solid.js" class="w-10 h-10 transition-all duration-300 hover:scale-110 hover:rotate-6" />
+           <img src={solidjsSvg} alt="Solid.js" class="w-10 h-10 transition-transform duration-300 hover:scale-125 hover:rotate-6" />
          </div>
          <div class="tech-icon opacity-0" style="animation-delay: 1.45s;">
-           <img src={nextjsSvg} alt="Next.js" class="w-10 h-10 transition-all duration-300 hover:scale-110 hover:rotate-6" />
+           <img src={nextjsSvg} alt="Next.js" class="w-10 h-10 transition-transform duration-300 hover:scale-125 hover:rotate-6" />
          </div>
          <div class="tech-icon opacity-0" style="animation-delay: 1.6s;">
-           <img src={reactSvg} alt="React" class="w-10 h-10 transition-all duration-300 hover:scale-110 hover:rotate-6" />
+           <img src={reactSvg} alt="React" class="w-10 h-10 transition-transform duration-300 hover:scale-125 hover:rotate-6" />
          </div>
          <div class="tech-icon opacity-0" style="animation-delay: 1.75s;">
-           <img src={grpcSvg} alt="gRPC" class="w-10 h-10 transition-all duration-300 hover:scale-110 hover:rotate-6" />
+           <img src={grpcSvg} alt="gRPC" class="w-10 h-10 transition-transform duration-300 hover:scale-125 hover:rotate-6" />
          </div>
          <div class="tech-icon opacity-0" style="animation-delay: 1.9s;">
-           <img src={codeigniterSvg} alt="CodeIgniter" class="w-10 h-10 transition-all duration-300 hover:scale-110 hover:rotate-6" />
+           <img src={codeigniterSvg} alt="CodeIgniter" class="w-10 h-10 transition-transform duration-300 hover:scale-125 hover:rotate-6" />
          </div>
          <div class="tech-icon opacity-0" style="animation-delay: 2.05s;">
-           <img src={typescriptSvg} alt="TypeScript" class="w-10 h-10 transition-all duration-300 hover:scale-110 hover:rotate-6" />
+           <img src={typescriptSvg} alt="TypeScript" class="w-10 h-10 transition-transform duration-300 hover:scale-125 hover:rotate-6" />
          </div>
          <div class="tech-icon opacity-0" style="animation-delay: 2.2s;">
-           <img src={mysqlSvg} alt="MySQL" class="w-12 h-12 transition-all duration-300 hover:scale-110 hover:rotate-6" />
+           <img src={mysqlSvg} alt="MySQL" class="w-12 h-12 transition-transform duration-300 hover:scale-125 hover:rotate-6" />
          </div>
          <div class="tech-icon opacity-0" style="animation-delay: 2.35s;">
-           <img src={postgresSvg} alt="PostgreSQL" class="w-10 h-10 transition-all duration-300 hover:scale-110 hover:rotate-6" />
+           <img src={postgresSvg} alt="PostgreSQL" class="w-10 h-10 transition-transform duration-300 hover:scale-125 hover:rotate-6" />
          </div>
          <div class="tech-icon opacity-0" style="animation-delay: 2.5s;">
-           <img src={jwtSvg} alt="JWT" class="w-10 h-10 transition-all duration-300 hover:scale-110 hover:rotate-6" />
+           <img src={jwtSvg} alt="JWT" class="w-10 h-10 transition-transform duration-300 hover:scale-125 hover:rotate-6" />
          </div>
        </div>
     </div>
