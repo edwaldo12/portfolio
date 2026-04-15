@@ -19,7 +19,7 @@
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #0d9488;
+  background: #d97706;
 }
 
 /* Base styles */
@@ -37,12 +37,12 @@ body {
 
 /* Selection colors */
 ::selection {
-  background-color: #0d9488;
+  background-color: #d97706;
   color: #ffffff;
 }
 
 ::-moz-selection {
-  background-color: #0d9488;
+  background-color: #d97706;
   color: #ffffff;
 }
 
@@ -60,13 +60,13 @@ h1, h2, h3, h4, h5, h6 {
 
 /* Links */
 a {
-  color: #0d9488;
+  color: #d97706;
   text-decoration: none;
   transition: color 0.3s ease;
 }
 
 a:hover {
-  color: #14b8a6;
+  color: #f59e0b;
 }
 
 /* Button styles */
@@ -119,10 +119,10 @@ a:hover {
   transition: transform 0.3s ease-in-out;
 }
 
-/* Particle animation with teal color */
+/* Particle animation with amber color */
 .particle {
   position: absolute;
-  background: #0d9488;
+  background: #d97706;
   border-radius: 50%;
   pointer-events: none;
   animation: particle-float 20s linear infinite;
@@ -146,10 +146,10 @@ a:hover {
   }
 }
 
-/* Loading spinner with teal accent */
+/* Loading spinner with amber accent */
 .spinner {
   border: 2px solid #e5e7eb;
-  border-top: 2px solid #0d9488;
+  border-top: 2px solid #d97706;
   border-radius: 50%;
   width: 20px;
   height: 20px;
@@ -168,7 +168,7 @@ a:hover {
 
 /* Gradient text */
 .gradient-text {
-  background: linear-gradient(135deg, #0d9488 0%, #14b8a6 100%);
+  background: linear-gradient(135deg, #d97706 0%, #f59e0b 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -176,7 +176,7 @@ a:hover {
 
 /* Glow effect */
 .glow {
-  box-shadow: 0 0 20px rgba(13, 148, 136, 0.3);
+  box-shadow: 0 0 20px rgba(217, 119, 6, 0.3);
 }
 
 /* Responsive utilities */
