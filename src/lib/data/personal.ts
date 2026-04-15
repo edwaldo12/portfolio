@@ -66,24 +66,25 @@ export interface Experience {
 
 export const experiences: Experience[] = [
   {
-    id: 'exp-1',
+    id: 'exp-bfi',
     company: 'PT. BFI Finance Indonesia Tbk',
     position: 'Software Engineer',
     duration: 'May 2025 - Now',
     startDate: '2025',
     endDate: undefined,
     location: 'Jakarta, Indonesia',
-    description: 'Built loan status tracking system (Reschedule history, Appointment scheduling, etc) integrated with Goto, Tokopedia, Shopee and more. Engineered an event-driven architecture for the loan re-scheduling flow, focusing on status tracking directory and validation. This resulted in reducing latency from 5 seconds to under 0.5 seconds (measured at P95), while also enhancing readability and maintainability.',
-    technologies: ['Golang', 'Solid.JS', 'TypeScript', 'Git', 'Microservices', 'JWT', 'PostgreSQL', 'Message Broker (RabbitMQ)', 'NATS', 'GCP', 'GWS', 'Grpc', 'Datadog'],
+    description: 'Built loan status tracking system (Reschedule history, Appointment scheduling, etc) integrated with Goto, Tokopedia, Shopee and more. Engineered an event-driven architecture for the loan re-scheduling flow, reducing latency from 5 seconds to under 0.5 seconds at P95. Also built an event-driven, distributed e-signature platform that digitized field-survey workflows and reduced loan-disbursement time from ~1 day to minutes.',
+    technologies: ['Golang', 'Solid.JS', 'TypeScript', 'Git', 'Microservices', 'JWT', 'PostgreSQL', 'RabbitMQ', 'NATS', 'GCP', 'GWS', 'Redis', 'K8S', 'gRPC', 'Datadog', 'Temporal', 'ArangoDB'],
     achievements: [
-      'Rebuilt the loan rescheduling platform on an event-driven architecture, cutting partner-facing latency from 5 seconds to under 0.5 seconds across Goto, Tokopedia, and Shopee integrations',
+      'Rebuilt the loan rescheduling platform on an event-driven architecture, cutting partner-facing latency from 5 seconds to under 0.5 seconds (P95) across Goto, Tokopedia, and Shopee integrations',
       'Hardened messaging flows with RabbitMQ dead-letter queues, Redis idempotency guards, and Slack/GWS alerting to eliminate duplicate processing and shrink incident response time',
-      'Kept core services above 95% SonarQube-verified unit coverage while enforcing Clean Architecture patterns to speed the rollout of new capabilities'
+      'Delivered a distributed e-signature platform that digitized field-survey workflows and compressed loan disbursement from ~1 day to minutes with a complete compliance audit trail',
+      'Kept core services above 95% SonarQube-verified unit coverage while enforcing SOLID/Clean Architecture patterns with strict layer separation'
     ],
     current: true
   },
   {
-    id: 'exp-2',
+    id: 'exp-amani',
     company: 'PT. Amani Group',
     position: 'Software Engineer Team Lead',
     duration: 'Apr 2024 - May 2025',
@@ -91,7 +92,7 @@ export const experiences: Experience[] = [
     endDate: '2025',
     location: 'Jakarta, Indonesia',
     description: 'Developed and maintained key features, including Master-Material, Real Estate Management, Customer Relationship Management, and modules for Contractors and Home-Buyers. Led continuous upgrades to enhance overall functionality and user experience of the application. Collaborated in daily Agile SDLC meetings, implementing design patterns tailored to specific use cases.',
-    technologies: ['Golang', 'Next.js', 'Nest.js', 'Express', 'React.js', 'TypeScript', 'Git', 'Microservices', 'JWT', 'AXIOS', 'Redux', 'PostgreSQL', 'Message Broker (RabbitMQ)', 'GCP', 'Redis', 'Atomic Architecture', 'Websocket', 'Xendit'],
+    technologies: ['Golang', 'Next.js', 'Nest.js', 'Express', 'React.js', 'TypeScript', 'Git', 'Microservices', 'JWT', 'AXIOS', 'Redux', 'PostgreSQL', 'RabbitMQ', 'GCP', 'Redis', 'Atomic Architecture', 'Websocket', 'Xendit'],
     achievements: [
       'Orchestrated the migration and rollout of a unified CRM and real-estate suite without disrupting day-to-day operations',
       'Introduced service-to-service messaging and Atomic Design standards that boosted Next.js/React performance and UX consistency',
@@ -100,7 +101,7 @@ export const experiences: Experience[] = [
     current: false
   },
   {
-    id: 'exp-4',
+    id: 'exp-cimb',
     company: 'PT. CIMB Niaga',
     position: 'Software Engineer',
     duration: 'Aug 2023 - Apr 2024',
@@ -108,7 +109,7 @@ export const experiences: Experience[] = [
     endDate: '2024',
     location: 'Jakarta, Indonesia',
     description: 'Developed and maintained key features such as budget management and task delegation in IProC, based on Functional Specification Documents (FSD) and user requests, ensuring efficient and user-friendly solutions. Integrated third-party APIs to consume data from pengadaan.com. Refactored deprecated code, updated libraries, and upgraded the framework.',
-    technologies: ['PHP', 'CodeIgniter(4)', 'CSS', 'Bootstrap', 'ReactJS', 'TypeScript', 'MySQL', 'SQL Server', 'Express JS', 'Git', 'jQuery', 'Git', 'Microservices', 'Message Broker (NATS)'],
+    technologies: ['PHP', 'CodeIgniter 4', 'CSS', 'Bootstrap', 'ReactJS', 'TypeScript', 'MySQL', 'SQL Server', 'Express JS', 'Git', 'jQuery', 'Redux', 'Microservices', 'NATS'],
     achievements: [
       'Automated IProC budget and delegation workflows, integrating pengadaan.com data to deliver Phase 2b on schedule',
       'Optimized high-volume SQL workloads and modernized legacy components, stabilizing procurement reporting for business stakeholders',
@@ -117,70 +118,87 @@ export const experiences: Experience[] = [
     current: false
   },
   {
-    id: 'exp-3',
+    id: 'exp-intellix',
     company: 'PT. Intellix Global Crossing',
     position: 'Software Engineer',
-    duration: 'May 2022 - June 2023',
+    duration: 'May 2022 - Jun 2023',
     startDate: '2022',
     endDate: '2023',
     location: 'Jakarta, Indonesia',
-    description: 'Engineered and optimized robust features, significantly elevating the performance and security of a structured service-oriented database design and real-time socket communication. Employed Atomic Design principles and implemented key performance optimizations to enhance the efficiency and scalability of Next.js and React applications.',
-    technologies: ['Golang', 'Next.js', 'Nest.js', 'Express', 'React.js', 'TypeScript', 'Git', 'Microservices', 'JWT', 'AXIOS', 'Redux', 'PostgreSQL', 'Message Broker (RabbitMQ)', 'GCP', 'Redis', 'Atomic Architecture', 'Websocket', 'Xendit'],
+    description: 'Engineered and optimized robust features, significantly elevating the performance and security of platforms for clients including BRI Danareksa Sekuritas, Bank Mega Syariah, and Bank Sampoerna. Refined SQL tuning strategies for databases handling 5M+ records, spearheaded penetration testing, and migrated legacy tools while modernizing PHP/Node.js stacks.',
+    technologies: ['NodeJS', 'Express', 'ReactJS', 'PHP', 'CodeIgniter 3', 'CodeIgniter 4', 'MongoDB', 'MySQL', 'PostgreSQL', 'Redis', 'JavaScript', 'jQuery', 'Git', 'HTML', 'CSS', 'SCSS', 'Webpack'],
     achievements: [
       'Elevated capital-market platforms for BRI Danareksa, Bank Mega Syariah, and Bank Sampoerna by tuning 5M+ row databases and modernizing Node/PHP services',
       'Led penetration-hardening initiatives and cross-team delivery to keep concurrent SCRUM projects on track',
-      'Integrated Jatis WhatsApp Blast and LDAP services, expanding contact-center automation and reliability'
+      'Integrated Jatis WhatsApp Blast and LDAP services into the Ecentrix Application, expanding contact-center automation and reliability'
     ],
     current: false
   },
   {
-    id: 'exp-1a',
-    company: 'PT. Sinar Sanata',
-    position: 'Fullstack Developer',
-    duration: 'Jan 2021 - Apr 2022',
-    startDate: '2021',
+    id: 'exp-freelance',
+    company: 'Self Employed',
+    position: 'Software Engineer Freelancer',
+    duration: '2019 - 2022',
+    startDate: '2019',
     endDate: '2022',
-    location: 'Jakarta, Indonesia',
-    description: 'Developed and maintained web applications for automotive industry solutions. Built comprehensive inventory management systems and customer relationship management tools. Implemented responsive web interfaces and optimized database performance for high-volume transactions.',
-    technologies: ['PHP', 'Laravel', 'MySQL', 'JavaScript', 'jQuery', 'Bootstrap', 'Git', 'REST APIs', 'HTML', 'CSS'],
+    location: 'Palembang, Indonesia',
+    description: 'Delivered over 10 custom web applications tailored to unique client needs across multiple industries. Managed ongoing upgrades to enhance functionality and user experience, and provided custom training to improve user proficiency.',
+    technologies: ['HTML', 'CSS', 'Bootstrap', 'JavaScript', 'Express JS', 'PHP', 'Laravel', 'MySQL', 'ReactJS', 'Git'],
     achievements: [
-      'Delivered an automotive inventory and CRM platform that improved dealer response times and data accuracy',
-      'Implemented automated reporting pipelines that removed manual reconciliation for operations teams',
-      'Crafted responsive web interfaces and database optimizations that kept high-volume transactions fast'
+      'Shipped 10+ bespoke web applications end-to-end, from requirements gathering through launch and training',
+      'Drove ongoing upgrades that improved user engagement and feature reliability across long-term client engagements',
+      'Provided hands-on user training that lifted client proficiency and adoption of the delivered tooling'
     ],
     current: false
   },
   {
-    id: 'exp-1b',
-    company: 'Smart Integrated System',
-    position: 'Software Developer',
-    duration: 'Jun 2020 - Dec 2020',
+    id: 'exp-sinar-sanata',
+    company: 'PT Sinar-Sanata Electronic Industry',
+    position: 'Software Engineer (Internship)',
+    duration: 'Jan 2020 - Aug 2020',
     startDate: '2020',
     endDate: '2020',
-    location: 'Jakarta, Indonesia',
-    description: 'Worked on enterprise software solutions and system integrations. Developed custom applications for business process automation and data management. Collaborated with cross-functional teams to deliver integrated solutions for various clients.',
-    technologies: ['Java', 'Spring Boot', 'MySQL', 'JavaScript', 'React', 'Node.js', 'Git', 'REST APIs', 'Docker'],
+    location: 'Palembang, Indonesia',
+    description: 'Developed a user-friendly online store app for product display and an admin tool for stock tracking. Designed system architecture and database structures, collaborated closely with the team on execution, and conducted user training for adoption.',
+    technologies: ['PHP', 'Laravel', 'CSS', 'Bootstrap', 'MySQL', 'Git'],
     achievements: [
-      'Delivered automated back-office workflows with custom Laravel and CodeIgniter services, reducing manual processing time by over 60%',
-      'Integrated partner systems through REST APIs that powered the organisation’s Android applications',
-      'Led stakeholder workshops and hands-on training to drive adoption of the new tooling'
+      'Built an online storefront and accompanying admin stock-tracking tool that streamlined daily operations',
+      'Designed the system architecture and database schema underpinning the storefront and admin modules',
+      'Ran user training sessions that drove smooth adoption of the new application'
     ],
     current: false
   },
   {
-    id: 'exp-1c',
-    company: 'Cyborg IT Center',
-    position: 'Junior Developer',
-    duration: 'Sep 2019 - May 2020',
+    id: 'exp-smart-integrated',
+    company: 'Smart Integrated System',
+    position: 'Software Engineer (Internship)',
+    duration: '2019 - 2020',
     startDate: '2019',
     endDate: '2020',
     location: 'Palembang, Indonesia',
-    description: 'Started career as junior developer working on various web development projects. Gained experience in full-stack development, database design, and client communication. Contributed to multiple client projects ranging from corporate websites to small business applications.',
-    technologies: ['PHP', 'CodeIgniter', 'MySQL', 'JavaScript', 'jQuery', 'Bootstrap', 'HTML', 'CSS', 'Git'],
+    description: 'Developed and implemented software solutions based on client requirements. Responsible for building REST APIs powering Android mobile applications, and delivered hands-on technical training to end users.',
+    technologies: ['PHP', 'CodeIgniter', 'Laravel', 'ReactJS', 'MySQL', 'Git'],
     achievements: [
-      'Delivered a secure athlete score-tracking platform with REST APIs powering companion Android apps',
-      'Managed end-to-end delivery for 15+ client web projects, from requirements through launch and training',
-      'Led knowledge-sharing sessions that upskilled the team on modern web development practices'
+      'Built client-driven software solutions that mapped directly to documented requirements',
+      'Designed and shipped REST APIs powering companion Android mobile applications',
+      'Delivered hands-on technical training to onboard end users onto the new tooling'
+    ],
+    current: false
+  },
+  {
+    id: 'exp-cyborg',
+    company: 'Cyborg IT Center',
+    position: 'Software Engineer (Freelance)',
+    duration: '2019 - 2020',
+    startDate: '2019',
+    endDate: '2020',
+    location: 'Palembang, Indonesia',
+    description: 'Developed and implemented a software solution for an athlete client to track scoring data. Responsible for building REST APIs powering an Android mobile app, and provided technical training to end users.',
+    technologies: ['HTML', 'CSS', 'JavaScript', 'PHP', 'CodeIgniter', 'MySQL'],
+    achievements: [
+      'Delivered an athlete score-tracking platform tailored to client workflows',
+      'Built REST APIs that powered the companion Android mobile application',
+      'Provided technical training to end users to ensure successful rollout'
     ],
     current: false
   }

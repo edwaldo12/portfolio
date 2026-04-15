@@ -207,7 +207,7 @@
   bind:this={heroElement}
   class="relative min-h-screen flex items-center justify-center bg-gradient-to-br from-gray-50 to-white overflow-hidden"
 >
-  <div class="absolute bottom-16 right-20">
+  <div class="hidden lg:block absolute bottom-16 right-20">
     <div class="relative flex flex-col items-end gap-3">
       <div class="flex gap-6">
         {#each featuredTechIcon as icon}
@@ -347,7 +347,7 @@
 
 <style>
   .text-gradient {
-    background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+    background: linear-gradient(135deg, #4f46e5 0%, #4338ca 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;

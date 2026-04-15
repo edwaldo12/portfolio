@@ -339,7 +339,7 @@
           <!-- Status Message -->
           {#if submitMessage}
             <div class="p-4 rounded-lg text-center transition-all duration-300
-              {submitStatus === 'success' ? 'bg-green-500/10 text-green-400 border border-green-500/20' : ''}
+              {submitStatus === 'success' ? 'bg-accent/10 text-accent border border-accent/20' : ''}
               {submitStatus === 'error' ? 'bg-red-500/10 text-red-400 border border-red-500/20' : ''}"
             >
               {submitMessage}
@@ -353,7 +353,7 @@
 
 <style>
   .text-gradient {
-    background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+    background: linear-gradient(135deg, #4f46e5 0%, #4338ca 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;

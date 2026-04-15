@@ -173,7 +173,7 @@
       <!-- Progress Bar -->
       <div bind:this={progressBar} class="mb-8">
         <div class="w-64 h-1 bg-gray-300 rounded-full mx-auto overflow-hidden">
-          <div class="progress-fill h-full bg-gradient-to-r from-accent to-green-400 rounded-full w-0"></div>
+          <div class="progress-fill h-full bg-gradient-to-r from-accent to-indigo-400 rounded-full w-0"></div>
         </div>
       </div>
 
