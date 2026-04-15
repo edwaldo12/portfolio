@@ -39,7 +39,7 @@
   // Get level color based on skill level
   function getLevelColor(level: string) {
     switch (level) {
-      case 'Expert': return 'text-amber-500 bg-amber-500/10 border-amber-500/30';
+      case 'Expert': return 'text-blue-500 bg-blue-500/10 border-blue-500/30';
       case 'Advanced': return 'text-blue-400 bg-blue-400/10 border-blue-400/30';
       case 'Proficient': return 'text-yellow-400 bg-yellow-400/10 border-yellow-400/30';
       case 'Intermediate': return 'text-orange-400 bg-orange-400/10 border-orange-400/30';

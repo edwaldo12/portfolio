@@ -4,25 +4,25 @@ export default {
   theme: {
     extend: {
       colors: {
-        // Warm amber/bronze palette - professional and distinctive
+        // Minimalist & Modern palette - muted blue accent + charcoal text
         primary: {
-          50: '#fffbeb',
-          100: '#fef3c7',
-          200: '#fde68a',
-          300: '#fcd34d',
-          400: '#fbbf24',
-          500: '#f59e0b',
-          600: '#d97706',
-          700: '#b45309',
-          800: '#92400e',
-          900: '#78350f',
+          50: '#eff6ff',
+          100: '#dbeafe',
+          200: '#bfdbfe',
+          300: '#93c5fd',
+          400: '#60a5fa',
+          500: '#4A90E2',
+          600: '#2563eb',
+          700: '#1d4ed8',
+          800: '#1e40af',
+          900: '#1e3a8a',
         },
-        // Amber accent - warm and professional
-        accent: '#d97706', // Amber-600
-        // Branded text color
-        'text-primary': '#b45309', // Amber-700 for stronger contrast
+        // Muted blue accent - classic, professional
+        accent: '#4A90E2',
+        // Charcoal text
+        'text-primary': '#2E2E2E',
         // Slate secondary
-        secondary: '#1e293b', // Slate-800
+        secondary: '#1e293b',
         // Light theme focused neutral palette
         neutral: {
           50: '#fafafa',
