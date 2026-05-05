@@ -143,7 +143,8 @@
 {#if isVisible}
   <div 
     bind:this={loadingContainer}
-    class="fixed inset-0 z-[10000] bg-white flex items-center justify-center overflow-hidden"
+    class="fixed inset-0 z-[10000] flex items-center justify-center overflow-hidden"
+    style="background: #05090d;"
   >
     <!-- Enhanced Background Pattern with Gradual Transitions -->
     <div class="absolute inset-0 opacity-8">
@@ -157,23 +158,23 @@
     <div class="relative text-center px-8">
       <!-- Logo/Name -->
       <div bind:this={logoText} class="mb-4">
-        <h1 class="text-5xl md:text-7xl font-bold text-gray-900 tracking-tight">
+        <h1 class="text-5xl md:text-7xl font-bold text-white tracking-tight">
           {personalInfo.name.split(' ')[0]}
         </h1>
-        <div class="w-24 h-1 bg-accent mx-auto mt-4 rounded-full"></div>
+        <div class="w-24 h-1 mx-auto mt-4 rounded-full" style="background: #39d98a;"></div>
       </div>
 
       <!-- Subtitle -->
       <div bind:this={subtitle} class="mb-12">
-        <p class="text-xl md:text-2xl text-gray-600 font-light tracking-wide">
+        <p class="text-xl md:text-2xl font-light tracking-wide" style="color: #9eabc1;">
           Fullstack Engineer
         </p>
       </div>
 
       <!-- Progress Bar -->
       <div bind:this={progressBar} class="mb-8">
-        <div class="w-64 h-1 bg-gray-300 rounded-full mx-auto overflow-hidden">
-          <div class="progress-fill h-full bg-gradient-to-r from-accent to-blue-400 rounded-full w-0"></div>
+        <div class="w-64 h-1 rounded-full mx-auto overflow-hidden" style="background: rgba(143, 165, 189, 0.28);">
+          <div class="progress-fill h-full rounded-full w-0" style="background: #39d98a;"></div>
         </div>
       </div>
 
@@ -182,14 +183,15 @@
         {#each Array(3) as _, i}
           <div 
             bind:this={dots[i]}
-            class="w-3 h-3 bg-accent rounded-full"
+            class="w-3 h-3 rounded-full"
+            style="background: #39d98a;"
           ></div>
         {/each}
       </div>
 
       <!-- Loading Text -->
       <div class="mt-6">
-        <p class="text-sm text-gray-500 tracking-widest uppercase">
+        <p class="text-sm tracking-widest uppercase" style="color: #8e9caf;">
           Loading Experience
         </p>
       </div>
