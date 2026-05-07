@@ -14,6 +14,7 @@
     Terminal
   } from 'lucide-svelte';
   import { experiences, personalInfo } from '$lib/data/personal';
+  import { activeDiagramNodes, projects } from '$lib/data/projects';
   import golangSvg from '$lib/assets/golang.svg';
   import phpSvg from '$lib/assets/php.svg';
   import typescriptSvg from '$lib/assets/typescript.svg';
@@ -41,6 +42,12 @@
     summary: `${experience.description.split('.')[0]}.`
   }));
 
+  const companyLogos: Record<string, string> = {
+    'exp-digital-rox': '/icons/company/golrox.png',
+    'exp-bfi': '/icons/company/bfi.png',
+    'exp-amani': '/icons/company/amani-mark.png'
+  };
+
   const expertise = [
     { label: 'Backend Systems', icon: Server },
     { label: 'Cloud Architecture', icon: Cloud },
@@ -52,9 +59,11 @@
     { label: 'Backend Engineering', score: '9.5/10', level: 19 },
     { label: 'System Design', score: '9.0/10', level: 18 },
     { label: 'Cloud & DevOps', score: '8.5/10', level: 17 },
-    { label: 'Fullstack Development', score: '9.0/10', level: 18 },
+    { label: 'Frontend Development', score: '8.0/10', level: 16 },
     { label: 'Performance Tuning', score: '8.5/10', level: 17 }
   ];
+
+  const skillSegments = Array.from({ length: 20 });
 
   const impacts = [
     {
@@ -83,41 +92,7 @@
     }
   ];
 
-  const projects = [
-    {
-      title: 'admin-v2-automation',
-      description:
-        'Core workflow automation platform that reduced manual processing time by 90% and improved operational execution.',
-      tags: ['Go', 'Next.js', 'PostgreSQL', 'Redis', 'K8S'],
-      diagram: [
-        ['Admin UI', 'Workflow API', 'Ops Rules'],
-        ['Queue', 'Automation', 'Audit Log'],
-        ['Reporting', 'Notification', 'Business Ops']
-      ]
-    },
-    {
-      title: 'internal-payment-proxy',
-      description:
-        'Internal proxy payment gateway deployed inside Kubernetes with service-only access and stronger network boundaries.',
-      tags: ['Go', 'Kubernetes', 'Nginx', 'RabbitMQ', 'GCP'],
-      diagram: [
-        ['Internal App', 'Proxy API', 'Payment Route'],
-        ['Service Auth', 'Gateway', 'Provider Sync'],
-        ['Monitoring', 'Retry Queue', 'Audit Trail']
-      ]
-    },
-    {
-      title: 'ai-support-agent',
-      description:
-        'LangChain/LangGraph ReAct support agent integrated with Chatwoot for FAQ, order lookup, and payment checks.',
-      tags: ['Python', 'LangChain', 'LangGraph', 'RAG', 'FAISS'],
-      diagram: [
-        ['Chatwoot', 'ReAct Agent', 'Tool Router'],
-        ['FAQ RAG', 'Order Lookup', 'Payment Check'],
-        ['FAISS', 'Backend APIs', 'Support Ops']
-      ]
-    }
-  ];
+  const featuredProjects = projects.slice(0, 3);
 
   const techGroups = [
     {
@@ -213,23 +188,42 @@
   ];
 
   const mapRows = [
-    '.........................',
-    '.................::......',
-    '............:::::::......',
-    '.........:::::::::....::.',
-    '......::::::::::....::::.',
-    '.....::::::::...::::::::.',
-    '.......::::....:::::.....',
-    '.........::..::::........',
-    '...........::...@@.......',
-    '..............::::.......',
-    '..................::.....',
-    '.....................:...'
+    '..........................           ',
+    '..........................           ',
+    '...........................        ..',
+    '...........................       ...',
+    '.........................       .....',
+    '.......................       ...... ',
+    '......................      .......  ',
+    '....................       ......    ',
+    '..................        .....      ',
+    '.................       ......       ',
+    '...............       .......        ',
+    '.............        ......          ',
+    '...........       ........           ',
+    '..........      .........            ',
+    '.........      ...   ....            ',
+    '.......      ....     ....           ',
+    '.....      .....      ....           ',
+    '....      ......    ......    ..     ',
+    '...      ......     .......  ....    ',
+    '..      ......      ......  ......   ',
+    '       .......     ..@@..   ......  ',
+    '      ........   ..@@@@..    ...... ',
+    '     ..........  ...@@..      ..... ',
+    '    ...........     ....      ..... ',
+    '      .........      .....   ...... ',
+    '        ......        ............. ',
+    '          ...          ...........  ',
+    '                       .......      ',
+    '                         .....      ',
+    '                              ..    ',
+    '                              ..    '
   ];
 
-  function levelBlocks(level: number) {
-    return '█'.repeat(level) + '░'.repeat(20 - level);
-  }
+  const mapWidth = Math.max(...mapRows.map((row) => row.length));
+  const normalizedMapRows = mapRows.map((row) => row.padEnd(mapWidth, '.'));
+
 </script>
 
 <svelte:head>
@@ -286,18 +280,39 @@
       <div class="window-body">
         <div class="code-panel">
           <p><span>01</span># System Overview</p>
-          <p><span>02</span></p>
-          <p><span>03</span>user:     Edwaldo Utama</p>
-          <p><span>04</span>role:     Senior Full-Stack Engineer</p>
-          <p><span>05</span>location: Jakarta, Indonesia</p>
-          <p><span>06</span>status:   <strong>Open to new opportunities</strong></p>
-          <p><span>07</span></p>
+          <p class="code-line blank"><span>02</span></p>
+          <div class="meta-row">
+            <span>03</span>
+            <i>user:</i>
+            <b>Edwaldo Utama</b>
+          </div>
+          <div class="meta-row">
+            <span>04</span>
+            <i>role:</i>
+            <b>Senior Full-Stack Engineer</b>
+          </div>
+          <div class="meta-row">
+            <span>05</span>
+            <i>location:</i>
+            <b>Jakarta, Indonesia</b>
+          </div>
+          <div class="meta-row">
+            <span>06</span>
+            <i>status:</i>
+            <b><strong>Open to new opportunities</strong></b>
+          </div>
+          <p class="code-line blank"><span>07</span></p>
           <p><span>08</span><strong>$ skills --summary</strong></p>
           {#each skills as skill, index}
             <div class="skill-row">
               <span>{String(index + 9).padStart(2, '0')}</span>
+              <i class="branch">{index === skills.length - 1 ? '└─' : '├─'}</i>
               <i>{skill.label}</i>
-              <b>{levelBlocks(skill.level)}</b>
+              <b class="skill-meter" aria-label={`${skill.label} ${skill.score}`}>
+                {#each skillSegments as _, segment}
+                  <s class:filled={segment < skill.level}></s>
+                {/each}
+              </b>
               <em>{skill.score}</em>
             </div>
           {/each}
@@ -309,7 +324,15 @@
           <p><span>19</span>$<span class="cursor"></span></p>
         </div>
         <div class="map-panel">
-          <pre>{mapRows.join('\n')}</pre>
+          <div class="ascii-map" aria-label="Indonesia region map">
+            {#each normalizedMapRows as row}
+              <div>
+                {#each Array.from(row) as point}
+                  <span class:water={point === '.'} class:hotspot={point === '@'}></span>
+                {/each}
+              </div>
+            {/each}
+          </div>
           <div class="status-box">
             <strong>System Status</strong>
             <p><span>Health</span><b>Optimal</b></p>
@@ -327,7 +350,13 @@
       <div class="timeline">
         {#each featuredExperiences as exp}
           <article>
-            <div class="company-icon">{exp.company.slice(0, 1)}</div>
+            <div class="company-icon" class:wide-logo={exp.id === 'exp-amani'}>
+              {#if companyLogos[exp.id]}
+                <img src={companyLogos[exp.id]} alt={`${exp.company} logo`} />
+              {:else}
+                <span>{exp.company.slice(0, 1)}</span>
+              {/if}
+            </div>
             <div>
               <div class="timeline-head">
                 <h3>{exp.company.replace('PT. ', '').replace('PT ', '')}</h3>
@@ -364,7 +393,7 @@
   <section id="projects" class="terminal-section">
     <h2>// PROJECT HIGHLIGHTS</h2>
     <div class="project-grid">
-      {#each projects as project}
+      {#each featuredProjects as project}
         <article class="project-card">
           <div class="project-top">
             <h3>{project.title}</h3>
@@ -374,7 +403,7 @@
             {#each project.diagram as row, rowIndex}
               <div class="diagram-row">
                 {#each row as box}
-                  <span class:active={rowIndex === 1 && ['Automation', 'Gateway', 'Order Lookup'].includes(box)}>{box}</span>
+                  <span class:active={rowIndex === 1 && activeDiagramNodes.includes(box)}>{box}</span>
                 {/each}
               </div>
             {/each}
@@ -387,6 +416,9 @@
           </div>
         </article>
       {/each}
+    </div>
+    <div class="section-action">
+      <a class="terminal-button" href="/projects">View More Projects -></a>
     </div>
   </section>
 
@@ -403,6 +435,8 @@
                   src={item.icon}
                   alt={item.name}
                   title={item.name}
+                  class:wide-brand-icon={['LangGraph', 'GitHub Actions', 'CI/CD'].includes(item.name)}
+                  class:langgraph-icon={item.name === 'LangGraph'}
                 />
               {:else}
                 <span>{item.name}</span>
@@ -623,7 +657,7 @@
 
   .window-body {
     display: grid;
-    grid-template-columns: minmax(0, 1.45fr) minmax(190px, 0.75fr);
+    grid-template-columns: minmax(0, 1fr) minmax(180px, 0.54fr);
     gap: 14px;
     padding: 16px;
   }
@@ -635,38 +669,89 @@
     font-size: 0.78rem;
   }
 
-  .code-panel p span:first-child {
+  .code-panel p span:first-child,
+  .meta-row > span,
+  .skill-row > span:first-child {
     display: inline-block;
     width: 34px;
     color: #697789;
   }
 
-  .skill-row {
+  .code-line.blank {
+    min-height: 1.42em;
+  }
+
+  .meta-row {
     display: grid;
-    grid-template-columns: 34px minmax(155px, 1fr) 112px 50px;
-    align-items: center;
-    gap: 8px;
+    grid-template-columns: 34px 118px minmax(0, 1fr);
+    align-items: baseline;
+    gap: 0;
     margin: 0 0 6px;
     color: #a9b7ca;
     font-size: 0.78rem;
   }
 
-  .skill-row span {
-    color: #697789;
+  .meta-row i,
+  .meta-row b {
+    min-width: 0;
+    font-style: normal;
+    font-weight: 400;
+    white-space: nowrap;
   }
 
-  .skill-row i {
+  .meta-row i {
+    color: #a9b7ca;
+  }
+
+  .meta-row b {
+    color: #a9b7ca;
+  }
+
+  .skill-row {
+    display: grid;
+    grid-template-columns: 34px 24px minmax(140px, 1fr) 104px 46px;
+    align-items: center;
+    gap: 6px;
+    margin: 0 0 6px;
+    color: #a9b7ca;
+    font-size: 0.78rem;
+  }
+
+  .skill-row i:not(.branch) {
     font-style: normal;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
   }
 
-  .skill-row b {
-    color: #39d98a;
-    font-weight: 400;
+  .skill-row .branch {
+    color: #8392a6;
+    font-style: normal;
+    line-height: 1;
+  }
+
+  .skill-meter {
+    display: grid;
+    grid-template-columns: repeat(20, 1fr);
+    gap: 2px;
+    width: 104px;
+    height: 12px;
     overflow: hidden;
-    white-space: nowrap;
+    font-weight: 400;
+  }
+
+  .skill-meter s {
+    display: block;
+    min-width: 0;
+    height: 100%;
+    border-radius: 1px;
+    background: rgba(143, 165, 189, 0.22);
+    text-decoration: none;
+  }
+
+  .skill-meter s.filled {
+    background: #67d794;
+    box-shadow: inset 0 0 0 1px rgba(23, 117, 72, 0.24);
   }
 
   .skill-row em {
@@ -675,16 +760,45 @@
     margin-left: 0;
   }
 
-  .map-panel pre {
-    min-height: 176px;
+  .ascii-map {
+    display: grid;
+    place-content: center;
+    min-height: 196px;
     border: 1px solid rgba(143, 165, 189, 0.18);
     border-radius: 6px;
     margin: 0 0 18px;
     padding: 12px;
-    color: rgba(95, 255, 178, 0.7);
-    font-size: 10px;
-    line-height: 1.15;
     overflow: hidden;
+  }
+
+  .ascii-map div {
+    display: flex;
+    height: 6px;
+  }
+
+  .ascii-map span {
+    position: relative;
+    display: block;
+    width: 5px;
+    height: 6px;
+    flex: 0 0 5px;
+  }
+
+  .ascii-map span::before {
+    content: '';
+    position: absolute;
+    inset: 1px;
+    border-radius: 1px;
+  }
+
+  .ascii-map span.water::before {
+    background: rgba(119, 147, 173, 0.42);
+  }
+
+  .ascii-map span.hotspot::before {
+    inset: 1px;
+    background: #6fe79b;
+    box-shadow: 0 0 9px rgba(111, 231, 155, 0.85);
   }
 
   .status-box {
@@ -695,19 +809,28 @@
   }
 
   .status-box p {
-    display: flex;
-    justify-content: space-between;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 96px;
+    align-items: center;
     gap: 18px;
     margin: 10px 0 0;
     color: #a9b7ca;
   }
 
+  .status-box b {
+    display: grid;
+    grid-template-columns: 8px 1fr;
+    align-items: center;
+    gap: 10px;
+    color: #d5deea;
+    font-weight: 700;
+  }
+
   .status-box b::before {
     content: '';
-    display: inline-block;
+    display: block;
     width: 7px;
     height: 7px;
-    margin-right: 10px;
     border-radius: 999px;
     background: #39d98a;
     box-shadow: 0 0 12px rgba(57, 217, 138, 0.8);
@@ -765,8 +888,23 @@
     height: 42px;
     border-radius: 8px;
     border: 1px solid rgba(143, 165, 189, 0.24);
+    background: rgba(247, 247, 245, 0.96);
+    overflow: hidden;
+  }
+
+  .company-icon img {
+    width: 31px;
+    height: 31px;
+    object-fit: contain;
+  }
+
+  .company-icon.wide-logo img {
+    width: 32px;
+    height: 32px;
+    object-fit: contain;
+  }
+  .company-icon span {
     color: #f7f7f5;
-    background: linear-gradient(135deg, #1e8b58, #1c9be8);
     font-weight: 800;
   }
 
@@ -844,6 +982,12 @@
     display: grid;
     grid-template-columns: repeat(3, minmax(0, 1fr));
     gap: 14px;
+  }
+
+  .section-action {
+    display: flex;
+    justify-content: center;
+    margin-top: 16px;
   }
 
   .project-card {
@@ -931,6 +1075,21 @@
     height: 28px;
     object-fit: contain;
     filter: drop-shadow(0 0 10px rgba(57, 217, 138, 0.08));
+  }
+
+  .stack-group img.wide-brand-icon {
+    width: 48px;
+    height: 30px;
+    object-fit: contain;
+  }
+
+  .stack-group img.langgraph-icon {
+    width: 54px;
+    height: 30px;
+    object-fit: cover;
+    border-radius: 999px;
+    filter: brightness(2.15) saturate(1.7) contrast(1.08)
+      drop-shadow(0 0 14px rgba(57, 217, 138, 0.18));
   }
 
   .stack-group span {
