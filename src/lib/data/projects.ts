@@ -1,117 +1,130 @@
-export interface Project {
-  id: string;
+export interface ProjectHighlight {
   title: string;
   description: string;
-  longDescription?: string;
-  technologies: string[];
-  imageUrl: string;
-  images?: string[];
-  liveUrl?: string;
-  githubUrl?: string;
-  category: 'web' | 'mobile' | 'desktop' | 'design';
-  createdAt: string;
-  featured: boolean;
+  tags: string[];
+  diagram: string[][];
 }
 
-export const projects: Project[] = [
-  // {
-  //   id: 'project-1',
-  //   title: 'E-commerce Platform',
-  //   description: 'Modern e-commerce solution with advanced features',
-  //   longDescription: 'A comprehensive e-commerce platform built with modern web technologies, featuring user authentication, payment processing, inventory management, and responsive design.',
-  //   technologies: ['Svelte', 'TypeScript', 'Tailwind CSS', 'Stripe', 'Node.js'],
-  //   imageUrl: '/images/projects/ecommerce.jpg',
-  //   images: ['/images/projects/ecommerce-1.jpg', '/images/projects/ecommerce-2.jpg'],
-  //   liveUrl: 'https://example-ecommerce.com',
-  //   githubUrl: 'https://github.com/edwaldo/ecommerce-platform',
-  //   category: 'web',
-  //   createdAt: '2024-01-15',
-  //   featured: true
-  // },
-  // {
-  //   id: 'project-2',
-  //   title: 'Task Management App',
-  //   description: 'Collaborative task management with real-time updates',
-  //   longDescription: 'A powerful task management application with real-time collaboration features, drag-and-drop functionality, and team productivity analytics.',
-  //   technologies: ['React', 'TypeScript', 'Firebase', 'Material-UI'],
-  //   imageUrl: '/images/projects/taskapp.jpg',
-  //   images: ['/images/projects/taskapp-1.jpg', '/images/projects/taskapp-2.jpg'],
-  //   liveUrl: 'https://example-taskapp.com',
-  //   githubUrl: 'https://github.com/edwaldo/task-management',
-  //   category: 'web',
-  //   createdAt: '2023-11-20',
-  //   featured: true
-  // },
-  // {
-  //   id: 'project-3',
-  //   title: 'Mobile Banking UI',
-  //   description: 'Modern banking app interface design',
-  //   longDescription: 'Complete UI/UX design for a mobile banking application, focusing on security, accessibility, and user-friendly financial management.',
-  //   technologies: ['Figma', 'Adobe XD', 'Principle', 'InVision'],
-  //   imageUrl: '/images/projects/banking.jpg',
-  //   images: ['/images/projects/banking-1.jpg', '/images/projects/banking-2.jpg'],
-  //   category: 'design',
-  //   createdAt: '2023-09-10',
-  //   featured: true
-  // },
-  // {
-  //   id: 'project-4',
-  //   title: 'Portfolio Website',
-  //   description: 'Personal portfolio with modern animations',
-  //   longDescription: 'A sleek portfolio website featuring smooth animations, dark theme, and responsive design to showcase development skills and projects.',
-  //   technologies: ['SvelteKit', 'TypeScript', 'Tailwind CSS', 'GSAP'],
-  //   imageUrl: '/images/projects/portfolio.jpg',
-  //   liveUrl: 'https://edwaldo-portfolio.com',
-  //   githubUrl: 'https://github.com/edwaldo/portfolio',
-  //   category: 'web',
-  //   createdAt: '2024-02-01',
-  //   featured: false
-  // },
-  // {
-  //   id: 'project-5',
-  //   title: 'Weather Dashboard',
-  //   description: 'Real-time weather monitoring dashboard',
-  //   longDescription: 'Interactive weather dashboard with real-time data visualization, location-based forecasts, and customizable widgets.',
-  //   technologies: ['Vue.js', 'Chart.js', 'OpenWeather API', 'Vuetify'],
-  //   imageUrl: '/images/projects/weather.jpg',
-  //   liveUrl: 'https://example-weather.com',
-  //   githubUrl: 'https://github.com/edwaldo/weather-dashboard',
-  //   category: 'web',
-  //   createdAt: '2023-08-15',
-  //   featured: false
-  // },
-  // {
-  //   id: 'project-6',
-  //   title: 'Restaurant Branding',
-  //   description: 'Complete brand identity for restaurant chain',
-  //   longDescription: 'Comprehensive branding project including logo design, menu layouts, packaging design, and digital marketing materials for a modern restaurant chain.',
-  //   technologies: ['Adobe Illustrator', 'Photoshop', 'InDesign', 'After Effects'],
-  //   imageUrl: '/images/projects/restaurant.jpg',
-  //   category: 'design',
-  //   createdAt: '2023-07-01',
-  //   featured: false
-  // }
+export const projects: ProjectHighlight[] = [
+  {
+    title: 'golrox.com',
+    description:
+      'Roblox marketplace stack with Next.js storefront, Go payment gateway, Redis-backed queue workers, and automated order fulfillment.',
+    tags: ['Next.js', 'React', 'TypeScript', 'Prisma', 'PostgreSQL', 'Go', 'Gin', 'Redis', 'RabbitMQ'],
+    diagram: [
+      ['Storefront', 'Checkout', 'Order DB'],
+      ['GPG', 'Payment Webhook', 'Queue Service'],
+      ['BullMQ Redis', 'Roblox Worker', 'Fulfillment']
+    ]
+  },
+  {
+    title: 'admin-v2-automation',
+    description:
+      'Core workflow automation platform that reduced manual processing time by 90% and improved operational execution.',
+    tags: ['Go', 'Next.js', 'PostgreSQL', 'Redis', 'K8S'],
+    diagram: [
+      ['Admin UI', 'Workflow API', 'Ops Rules'],
+      ['Queue', 'Automation', 'Audit Log'],
+      ['Reporting', 'Notification', 'Business Ops']
+    ]
+  },
+  {
+    title: 'ai-support-agent',
+    description:
+      'LangChain/LangGraph ReAct support agent integrated with Chatwoot for FAQ, order lookup, and payment checks.',
+    tags: ['Python', 'LangChain', 'LangGraph', 'RAG', 'FAISS'],
+    diagram: [
+      ['Chatwoot', 'ReAct Agent', 'Tool Router'],
+      ['FAQ RAG', 'Order Lookup', 'Payment Check'],
+      ['FAISS', 'Backend APIs', 'Support Ops']
+    ]
+  },
+  {
+    title: 'internal-payment-proxy',
+    description:
+      'Internal proxy payment gateway deployed inside Kubernetes with service-only access and stronger network boundaries.',
+    tags: ['Go', 'Kubernetes', 'Nginx', 'RabbitMQ', 'GCP'],
+    diagram: [
+      ['Internal App', 'Proxy API', 'Payment Route'],
+      ['Service Auth', 'Gateway', 'Provider Sync'],
+      ['Monitoring', 'Retry Queue', 'Audit Trail']
+    ]
+  },
+  {
+    title: 'ecommerce-builds',
+    description:
+      'Custom commerce platforms with product catalogs, checkout flows, payment integration, inventory, and admin operations.',
+    tags: ['Next.js', 'TypeScript', 'PostgreSQL', 'Payment Gateway', 'Admin'],
+    diagram: [
+      ['Catalog', 'Cart', 'Checkout'],
+      ['Payment', 'Inventory', 'Admin'],
+      ['SEO', 'Analytics', 'Operations']
+    ]
+  },
+  {
+    title: 'whatsapp-order-bots',
+    description:
+      'WhatsApp order automation using workflow orchestration and AI intent detection for intake, validation, and hand-off.',
+    tags: ['WhatsApp API', 'n8n', 'AI', 'Workflow', 'CRM'],
+    diagram: [
+      ['WhatsApp', 'Intent', 'Order Intake'],
+      ['n8n Flow', 'Validation', 'Payment Hand-off'],
+      ['CRM/ERP', 'Analytics', 'Human Handoff']
+    ]
+  },
+  {
+    title: 'telegram-solana-bot',
+    description:
+      'Telegram bot systems for Solana market monitoring, wallet workflows, portfolio tracking, and strategy automation.',
+    tags: ['Telegram Bot', 'Solana', 'Node.js', 'WebSocket', 'Automation'],
+    diagram: [
+      ['Telegram UI', 'Market Feed', 'Wallet'],
+      ['Strategy', 'Risk Rules', 'Execution'],
+      ['Portfolio', 'Alerts', 'Logs']
+    ]
+  },
+  {
+    title: 'custom-cms-platform',
+    description:
+      'Content management systems with admin dashboards, role management, publishing workflows, media, and SEO tooling.',
+    tags: ['CMS', 'Admin', 'RBAC', 'SEO', 'API'],
+    diagram: [
+      ['Editor', 'Media', 'Workflow'],
+      ['RBAC', 'Publishing', 'Versioning'],
+      ['SEO Tools', 'API', 'Backup']
+    ]
+  },
+  {
+    title: 'custom-development',
+    description:
+      'Tailored web applications, APIs, integrations, database design, performance optimization, and long-term support.',
+    tags: ['API', 'Integration', 'Database', 'Architecture', 'Performance'],
+    diagram: [
+      ['Discovery', 'Architecture', 'Roadmap'],
+      ['API', 'Database', 'Integration'],
+      ['Monitoring', 'Optimization', 'Support']
+    ]
+  }
 ];
 
-export const getProjectById = (id: string): Project | undefined => {
-  return projects.find(project => project.id === id);
-};
-
-export const getFeaturedProjects = (): Project[] => {
-  return projects.filter(project => project.featured);
-};
-
-export const getProjectsByCategory = (category: Project['category']): Project[] => {
-  return projects.filter(project => project.category === category);
-};
-
-export const getRecentProjects = (limit: number = 6): Project[] => {
-  return projects
-    .sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime())
-    .slice(0, limit);
-};
-
-export const getProjectCategories = (): Project['category'][] => {
-  const categories = [...new Set(projects.map(project => project.category))];
-  return categories;
-};
+export const activeDiagramNodes = [
+  'Automation',
+  'Gateway',
+  'Order Lookup',
+  'GPG',
+  'Payment Webhook',
+  'Queue Service',
+  'Payment',
+  'Inventory',
+  'Admin',
+  'n8n Flow',
+  'Validation',
+  'Strategy',
+  'Risk Rules',
+  'Execution',
+  'RBAC',
+  'Publishing',
+  'API',
+  'Database',
+  'Integration'
+];

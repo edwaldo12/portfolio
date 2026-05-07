@@ -26,10 +26,10 @@ export interface PersonalInfo {
 
 export const personalInfo: PersonalInfo = {
   name: 'Edwaldo Utama',
-  title: 'Fullstack Engineer',
-  subtitle: 'Building End-to-End Digital Solutions',
-  bio: 'Experienced fullstack engineer with 6+ years of expertise in modern technologies and scalable application development.',
-  longBio: 'I am an experienced fullstack engineer with over 6 years of experience building comprehensive digital solutions. I specialize in creating modern, scalable web applications using cutting-edge technologies across the entire stack. With 40+ projects completed and 20+ satisfied clients, I have proven expertise in delivering high-quality solutions that meet business objectives. I believe in clean code, robust architecture, and continuous learning to stay ahead in the ever-evolving world of web development.',
+  title: 'Senior Full-Stack Software Engineer',
+  subtitle: 'Backend & Platform Focus',
+  bio: 'Senior full-stack software engineer with 7+ years of experience building scalable web applications, backend systems, internal platforms, and cloud-native infrastructure.',
+  longBio: 'I am a senior full-stack software engineer with over 7 years of experience building scalable web applications, backend systems, internal platforms, and cloud-native infrastructure. I work across frontend, backend, and infrastructure with a strong focus on reliability, maintainability, observability, and business-focused delivery.',
   location: 'Jakarta, Indonesia',
   email: 'edwaldo.utama@gmail.com',
   phone: '+62 821-7614-4111',
@@ -44,7 +44,7 @@ export const personalInfo: PersonalInfo = {
     instagram: 'https://instagram.com/edwaldoutama'
   },
   stats: {
-    experience: '6+ Years',
+    experience: '7+ Years',
     projects: '40+ Projects',
     clients: '20+ Clients'
   }
@@ -66,12 +66,31 @@ export interface Experience {
 
 export const experiences: Experience[] = [
   {
+    id: 'exp-digital-rox',
+    company: 'PT. Digital Rox Indonesia',
+    position: 'Senior Software Engineer',
+    duration: 'Dec 2025 - Now',
+    startDate: '2025',
+    endDate: undefined,
+    location: 'Jakarta, Indonesia',
+    description: 'Improved infrastructure reliability for core business services, designed an internal proxy payment gateway in Kubernetes, led Admin v2 development, reduced manual processing time by 90%, optimized infrastructure costs by over 70%, migrated backend modules from Node.js to Golang, and built an AI customer-support agent integrated with Chatwoot.',
+    technologies: ['Golang', 'TypeScript', 'Python', 'Gin', 'Node.js', 'Django', 'PostgreSQL', 'Redis', 'BullMQ', 'RabbitMQ', 'JWT', 'WebSocket', 'Microservices', 'React.js', 'Next.js', 'LangChain', 'LangGraph', 'FAISS', 'RAG', 'Kubernetes', 'Docker', 'Helm', 'ArgoCD', 'Nginx', 'GCP', 'AWS', 'Alibaba Cloud', 'WireGuard VPN', 'CI/CD', 'Grafana', 'Prometheus', 'Google Analytics', 'Microsoft Clarity', 'Git'],
+    achievements: [
+      'Improved infrastructure reliability for core business services through deployment configuration, resource allocation, and monitoring optimization',
+      'Designed and deployed an internal proxy payment gateway within Kubernetes, restricting access exclusively to internal services',
+      'Led and contributed to Admin v2 development, building workflow automation features that reduced manual processing time by 90%',
+      'Reduced monthly infrastructure costs by over 70% through resource optimization, service consolidation, and architecture improvements',
+      'Built an AI customer-support agent using LangChain/LangGraph ReAct integrated with Chatwoot for FAQ responses, order lookups, and payment checks'
+    ],
+    current: true
+  },
+  {
     id: 'exp-bfi',
     company: 'PT. BFI Finance Indonesia Tbk',
     position: 'Software Engineer',
-    duration: 'May 2025 - Now',
+    duration: 'May 2025 - Dec 2025',
     startDate: '2025',
-    endDate: undefined,
+    endDate: '2025',
     location: 'Jakarta, Indonesia',
     description: 'Built loan status tracking system (Reschedule history, Appointment scheduling, etc) integrated with Goto, Tokopedia, Shopee and more. Engineered an event-driven architecture for the loan re-scheduling flow, reducing latency from 5 seconds to under 0.5 seconds at P95. Also built an event-driven, distributed e-signature platform that digitized field-survey workflows and reduced loan-disbursement time from ~1 day to minutes.',
     technologies: ['Golang', 'Solid.JS', 'TypeScript', 'Git', 'Microservices', 'JWT', 'PostgreSQL', 'RabbitMQ', 'NATS', 'GCP', 'GWS', 'Redis', 'K8S', 'gRPC', 'Datadog', 'Temporal', 'ArangoDB'],
@@ -81,7 +100,7 @@ export const experiences: Experience[] = [
       'Delivered a distributed e-signature platform that digitized field-survey workflows and compressed loan disbursement from ~1 day to minutes with a complete compliance audit trail',
       'Kept core services above 95% SonarQube-verified unit coverage while enforcing SOLID/Clean Architecture patterns with strict layer separation'
     ],
-    current: true
+    current: false
   },
   {
     id: 'exp-amani',

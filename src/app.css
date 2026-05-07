@@ -2,24 +2,21 @@
 @import 'tailwindcss/components';
 @import 'tailwindcss/utilities';
 
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
-
-/* Custom scrollbar with light colors */
 ::-webkit-scrollbar {
   width: 8px;
 }
 
 ::-webkit-scrollbar-track {
-  background: #f8f9fa;
+  background: #05090d;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #e5e7eb;
+  background: #25313d;
   border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #4A90E2;
+  background: #39d98a;
 }
 
 /* Base styles */
@@ -28,8 +25,8 @@ html {
 }
 
 body {
-  background-color: #ffffff;
-  color: #1f2937;
+  background-color: #05090d !important;
+  color: #d5deea;
   font-family: 'Inter', system-ui, sans-serif;
   line-height: 1.6;
   overflow-x: hidden;
@@ -53,7 +50,7 @@ body {
 
 /* Headings */
 h1, h2, h3, h4, h5, h6 {
-  color: #111827;
+  color: inherit;
   font-weight: 600;
   line-height: 1.2;
 }
@@ -218,12 +215,4 @@ a:hover {
   -webkit-backdrop-filter: blur(40px) saturate(180%);
   border: 1px solid rgba(255, 255, 255, 0.3);
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15), inset 0 1px 0 rgba(255, 255, 255, 0.4);
-}
-
-/* Light mode is default - dark mode can be added later if needed */
-@media (prefers-color-scheme: light) {
-  body {
-    background-color: #ffffff;
-    color: #1f2937;
-  }
 }
